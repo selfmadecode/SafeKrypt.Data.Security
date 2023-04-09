@@ -8,7 +8,17 @@ namespace SafeCrypt
     {
         public byte[] AesEncrypt(byte[] data, byte[] secretKey, byte[] iv)
             => EncryptAES(data, secretKey, iv);
-               
+
+        public byte[] AesEncrypt(string data, string secretKey, string iv)
+        {
+            NullChecks(data, secretKey, iv);
+
+            var aesKey = Encoding.UTF8.GetBytes(secretKey);
+            var aesIv = Encoding.UTF8.GetBytes(iv);
+            var aesData = data.HexadecimalStringToByteArray();
+
+            return EncryptAES(aesData, aesKey, aesIv);
+        }
 
         public string AesEncryptByteToHexString(byte[] data, byte[] secretKey, byte[] iv)
         {
