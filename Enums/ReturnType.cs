@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SafeCrypt.Enums
+namespace SafeCrypt
 {
-    public enum ReturnTypes
+    public enum ReturnType
     {
         Hex = 1,
         Bytes
