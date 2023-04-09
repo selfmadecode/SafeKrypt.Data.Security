@@ -26,6 +26,14 @@ namespace SafeCrypt
 
             return cipherText.ByteArrayToHexString();
         }
+
+        public string AesEncryptByteToBase64String(byte[] data, byte[] secretKey, byte[] iv)
+        {
+            var cipherText = EncryptAES(data, secretKey, iv);
+
+            return Convert.ToBase64String(cipherText);
+        }
+
         
 
         private void NullChecks(string data, string secretKey, string iv)
