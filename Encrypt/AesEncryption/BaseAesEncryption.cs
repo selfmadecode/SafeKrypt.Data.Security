@@ -33,5 +33,18 @@ namespace SafeCrypt
                 throw;
             }
         }
+
+        // Method to generate a random byte array of given length
+        // Used to get the IV
+        // Generate a random 16-byte IV for AES in CBC mode
+        public static byte[] GenerateRandomBytes(int length)
+        {
+            byte[] randomBytes = new byte[length];
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(randomBytes);
+            }
+            return randomBytes;
+        }
     }
 }

@@ -20,6 +20,25 @@ namespace SafeCrypt
             return EncryptAES(aesData, aesKey, aesIv);
         }
 
+        public AesData AesEncrypt(string data, string secretKey)
+        {
+            NullChecks(data, secretKey);
+
+            var aesIv = GenerateRandomBytes(16);
+            var aesKey = Encoding.UTF8.GetBytes(secretKey);
+            var aesData = data.HexadecimalStringToByteArray();
+
+            var response = EncryptAES(aesData, aesKey, aesIv);
+
+            var responseData = new AesData
+            {
+                Data = response,
+                Iv = aesIv
+            };
+
+            return responseData;
+        }
+
         public string AesEncryptByteToHexString(byte[] data, byte[] secretKey, byte[] iv)
         {
             var cipherText = EncryptAES(data, secretKey, iv);
@@ -53,9 +72,24 @@ namespace SafeCrypt
                 throw new ArgumentNullException("IV");
         }
 
+        private void NullChecks(string data, string secretKey)
+        {
+            if (data == null || data.Length <= 0)
+                throw new ArgumentNullException("plainText");
+
+            if (secretKey == null || secretKey.Length <= 0)
+                throw new ArgumentNullException("Key");
+        }
+
         //public byte[] AesEncrypt(byte[] data, byte[] key, byte[] iv, ReturnType returnType)
         //{
 
         //}        
+    }
+
+    public class AesData
+    {
+        public byte[] Data { get; set; }
+        public byte[] Iv { get; set; }
     }
 }
