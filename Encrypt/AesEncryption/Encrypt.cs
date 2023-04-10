@@ -75,10 +75,10 @@ namespace SafeCrypt
         private void NullChecks(string data, string secretKey)
         {
             if (data == null || data.Length <= 0)
-                throw new ArgumentNullException("plainText");
+                throw new ArgumentNullException(nameof(data));
 
             if (secretKey == null || secretKey.Length <= 0)
-                throw new ArgumentNullException("Key");
+                throw new ArgumentNullException(nameof(secretKey));
         }
 
         //public byte[] AesEncrypt(byte[] data, byte[] key, byte[] iv, ReturnType returnType)
