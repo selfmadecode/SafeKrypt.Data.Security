@@ -63,13 +63,13 @@ namespace SafeCrypt
         private void NullChecks(string data, string secretKey, string iv)
         {
             if (data == null || data.Length <= 0)
-                throw new ArgumentNullException("plainText");
+                throw new ArgumentNullException(nameof(data));
 
             if (secretKey == null || secretKey.Length <= 0)
-                throw new ArgumentNullException("Key");
+                throw new ArgumentNullException(nameof(secretKey));
 
             if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("IV");
+                throw new ArgumentNullException(nameof(iv));
         }
 
         private void NullChecks(string data, string secretKey)
