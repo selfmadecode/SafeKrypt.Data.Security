@@ -35,6 +35,7 @@ namespace SafeCrypt
         }
 
         // Method to generate a random byte array of given length
+        // Used to get the IV
         public static byte[] GenerateRandomBytes(int length)
         {
             byte[] randomBytes = new byte[length];
