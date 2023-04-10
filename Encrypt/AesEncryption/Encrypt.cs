@@ -18,7 +18,7 @@ namespace SafeCrypt
             var aesData = data.HexadecimalStringToByteArray();
 
             return EncryptAES(aesData, aesKey, aesIv);
-        }
+        }        
 
         public string AesEncryptByteToHexString(byte[] data, byte[] secretKey, byte[] iv)
         {
@@ -51,6 +51,15 @@ namespace SafeCrypt
 
             if (iv == null || iv.Length <= 0)
                 throw new ArgumentNullException("IV");
+        }
+
+        private void NullChecks(string data, string secretKey)
+        {
+            if (data == null || data.Length <= 0)
+                throw new ArgumentNullException("plainText");
+
+            if (secretKey == null || secretKey.Length <= 0)
+                throw new ArgumentNullException("Key");
         }
 
         //public byte[] AesEncrypt(byte[] data, byte[] key, byte[] iv, ReturnType returnType)
