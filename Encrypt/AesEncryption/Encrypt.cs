@@ -60,6 +60,12 @@ namespace SafeCrypt
             return cipherText.BytesToString();
         }
 
+        // needs methods that would accept aes mode
+        //public byte[] AesEncrypt(byte[] data, byte[] key, byte[] iv, ReturnType returnType)
+        //{
+
+        //}     
+
         private void NullChecks(string data, string secretKey, string iv)
         {
             if (data == null || data.Length <= 0)
@@ -79,12 +85,7 @@ namespace SafeCrypt
 
             if (secretKey == null || secretKey.Length <= 0)
                 throw new ArgumentNullException(nameof(secretKey));
-        }
-
-        //public byte[] AesEncrypt(byte[] data, byte[] key, byte[] iv, ReturnType returnType)
-        //{
-
-        //}        
+        }   
     }
 
     public class AesData
