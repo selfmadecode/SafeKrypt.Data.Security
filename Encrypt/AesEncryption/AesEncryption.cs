@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace SafeCrypt
 {
-    public class Encrypt : BaseAesEncryption
+    public class AesEncryption : BaseAesEncryption
     {
         public byte[] AesEncrypt(byte[] data, byte[] secretKey, byte[] iv)
             => EncryptAES(data, secretKey, iv);
@@ -20,7 +20,7 @@ namespace SafeCrypt
             return EncryptAES(aesData, aesKey, aesIv);
         }
 
-        public AesData AesEncrypt(string data, string secretKey)
+        public AesEncryptionData AesEncrypt(string data, string secretKey)
         {
             NullChecks(data, secretKey);
 
@@ -30,7 +30,7 @@ namespace SafeCrypt
 
             var response = EncryptAES(aesData, aesKey, aesIv);
 
-            var responseData = new AesData
+            var responseData = new AesEncryptionData
             {
                 Data = response,
                 Iv = aesIv
@@ -88,7 +88,7 @@ namespace SafeCrypt
         }   
     }
 
-    public class AesData
+    public class AesEncryptionData
     {
         public byte[] Data { get; set; }
         public byte[] Iv { get; set; }
