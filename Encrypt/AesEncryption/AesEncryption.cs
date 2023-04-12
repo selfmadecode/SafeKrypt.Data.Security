@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace SafeCrypt
 {
-    public class Encrypt : BaseAesEncryption
+    public class AesEncryption : BaseAesEncryption
     {
         public byte[] AesEncrypt(byte[] data, byte[] secretKey, byte[] iv)
             => EncryptAES(data, secretKey, iv);
