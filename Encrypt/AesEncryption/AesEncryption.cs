@@ -9,6 +9,9 @@ namespace SafeCrypt
         public byte[] AesEncrypt(byte[] data, byte[] secretKey, byte[] iv)
             => EncryptAES(data, secretKey, iv);
 
+        public byte[] AesDecrypt(byte[] data, byte[] secretKey, byte[] iv)
+            => DecryptAES(data, secretKey, iv);
+
         public byte[] AesEncrypt(string data, string secretKey, string iv)
         {
             NullChecks(data, secretKey, iv);
