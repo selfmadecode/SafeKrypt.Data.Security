@@ -34,10 +34,32 @@ namespace SafeCrypt
             }
         }
 
-        // Method to generate a random byte array of given length
-        // Used to get the IV
-        // Generate a random 16-byte IV for AES in CBC mode
-        public static byte[] GenerateRandomBytes(int length)
+        // Method to decrypt data using AES algorithm
+        public static byte[] DecryptAES(byte[] encryptedData, byte[] key, byte[] iv)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = key;
+                aes.IV = iv;
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                using (MemoryStream memoryStream = new MemoryStream(encryptedData))
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (MemoryStream decryptedStream = new MemoryStream())
+                        {
+                            cryptoStream.CopyTo(decryptedStream);
+                            return decryptedStream.ToArray();
+                        }
+                    }
+                }
+            }
+        }
+
+            // Method to generate a random byte array of given length
+            // Used to get the IV
+            // Generate a random 16-byte IV for AES in CBC mode
+            public static byte[] GenerateRandomBytes(int length)
         {
             byte[] randomBytes = new byte[length];
             using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
