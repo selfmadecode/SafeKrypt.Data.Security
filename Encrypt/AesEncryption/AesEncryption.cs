@@ -81,6 +81,13 @@ namespace SafeCrypt
                 throw new ArgumentNullException(nameof(iv));
         }
 
+        private (byte[], byte[]) ConvertKeysToBytes(string secretKey, string ivKey)
+        {
+            var secret = Encoding.UTF8.GetBytes(secretKey);
+            var iv = Encoding.UTF8.GetBytes(ivKey);
+
+            return (secret, iv);
+        }
         private void NullChecks(string data, string secretKey)
         {
             if (data == null || data.Length <= 0)
