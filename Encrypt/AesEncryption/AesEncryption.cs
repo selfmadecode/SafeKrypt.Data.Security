@@ -14,10 +14,13 @@ namespace SafeCrypt
 
         public byte[] AesEncrypt(string data, string secretKey, string iv)
         {
-            NullChecks(data, secretKey, iv);
+            NullChecks(data, secretKey, iv);           
 
-            var aesKey = Encoding.UTF8.GetBytes(secretKey);
-            var aesIv = Encoding.UTF8.GetBytes(iv);
+            var convertedKeys = ConvertKeysToBytes(secretKey, iv);
+
+            var aesKey = convertedKeys.Item1;
+            var aesIv = convertedKeys.Item2;
+
             var aesData = data.HexadecimalStringToByteArray();
 
             return EncryptAES(aesData, aesKey, aesIv);
