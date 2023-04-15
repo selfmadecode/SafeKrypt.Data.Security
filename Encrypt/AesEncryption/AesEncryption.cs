@@ -15,11 +15,12 @@ namespace SafeCrypt
         public byte[] AesEncrypt(string data, string secretKey, string iv)
         {
             NullChecks(data, secretKey, iv);
+            var convertedKeys = ConvertKeysToBytes(secretKey, iv);
 
-            var aesKey = Encoding.UTF8.GetBytes(secretKey);
-            var aesIv = Encoding.UTF8.GetBytes(iv);
+            var aesKey = convertedKeys.Item1;
+            var aesIv = convertedKeys.Item2;
+
             var aesData = data.HexadecimalStringToByteArray();
-
             return EncryptAES(aesData, aesKey, aesIv);
         }
 
@@ -81,6 +82,13 @@ namespace SafeCrypt
                 throw new ArgumentNullException(nameof(iv));
         }
 
+        private (byte[], byte[]) ConvertKeysToBytes(string secretKey, string ivKey)
+        {
+            var secret = Encoding.UTF8.GetBytes(secretKey);
+            var iv = Encoding.UTF8.GetBytes(ivKey);
+
+            return (secret, iv);
+        }
         private void NullChecks(string data, string secretKey)
         {
             if (data == null || data.Length <= 0)
