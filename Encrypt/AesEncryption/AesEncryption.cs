@@ -24,6 +24,18 @@ namespace SafeCrypt
             return EncryptAES(aesData, aesKey, aesIv);
         }
 
+        public byte[] AesDecrypt(string data, string secretKey, string iv)
+        {
+            NullChecks(data, secretKey, iv);
+            var convertedKeys = ConvertKeysToBytes(secretKey, iv);
+
+            var aesKey = convertedKeys.Item1;
+            var aesIv = convertedKeys.Item2;
+
+            var aesData = data.HexadecimalStringToByteArray();
+            return DecryptAES(aesData, aesKey, aesIv);
+        }
+
         public AesEncryptionData AesEncrypt(string data, string secretKey)
         {
             NullChecks(data, secretKey);
