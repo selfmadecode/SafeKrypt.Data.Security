@@ -27,10 +27,11 @@ namespace SafeCrypt
         public byte[] AesDecrypt(string data, string secretKey, string iv)
         {
             NullChecks(data, secretKey, iv);
-            var convertedKeys = ConvertKeysToBytes(secretKey, iv);
+            //var convertedKeys = ConvertKeysToBytes(secretKey, iv);
 
-            var aesKey = convertedKeys.Item1;
-            var aesIv = convertedKeys.Item2;
+            var (aesKey, aesIv) = ConvertKeysToBytesAndGetKeys(secretKey, iv);
+            //var aesKey = convertedKeys.Item1;
+            //var aesIv = convertedKeys.Item2;
 
             var aesData = data.HexadecimalStringToByteArray();
             return DecryptAES(aesData, aesKey, aesIv);
@@ -100,6 +101,13 @@ namespace SafeCrypt
             var iv = Encoding.UTF8.GetBytes(ivKey);
 
             return (secret, iv);
+        }
+
+        private (byte[], byte[]) ConvertKeysToBytesAndGetKeys(string secretKey, string iv)
+        {
+            var convertedKeys = ConvertKeysToBytes(secretKey, iv);
+
+            return (convertedKeys.Item1, convertedKeys.Item2);
         }
         private void NullChecks(string data, string secretKey)
         {
