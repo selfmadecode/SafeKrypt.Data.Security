@@ -94,4 +94,4 @@ If you would like to contribute to the development of the SafeCrypt library, fol
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE]([LICENSE](https://github.com/selfmadecode/SafeCrypt/tree/master?tab=MIT-1-ov-file)https://github.com/selfmadecode/SafeCrypt/tree/master?tab=MIT-1-ov-file) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/selfmadecode/SafeCrypt/tree/master?tab=MIT-1-ov-file)https://github.com/selfmadecode/SafeCrypt/tree/master?tab=MIT-1-ov-file file for details.
