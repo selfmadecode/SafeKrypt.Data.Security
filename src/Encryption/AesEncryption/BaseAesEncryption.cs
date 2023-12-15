@@ -1,6 +1,7 @@
 ﻿using SafeCrypt.src.Encryption.AesEncryption.Models;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -72,33 +73,41 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="ArgumentNullException">
         /// Thrown if the input encrypted data, key, or initialization vector is null.
         /// </exception>
-        public static byte[] DecryptAES(byte[] encryptedData, byte[] key, byte[] iv)
+        public static byte[] DecryptAES(ByteDecryptionParameters param)
         {
-            // Create an instance of the AES algorithm
-            using (Aes aes = Aes.Create())
+            try
             {
-                // Set the key and initialization vector
-                aes.Key = key;
-                aes.IV = iv;
-
-                // Create a decryptor using the key and initialization vector
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-                // Use a MemoryStream to read the encrypted data
-                using (MemoryStream memoryStream = new MemoryStream(encryptedData))
+                // Create an instance of the AES algorithm
+                using (Aes aes = Aes.Create())
                 {
-                    // Use a CryptoStream to perform the decryption
-                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    // Set the key and initialization vector
+                    aes.Key = param.SecretKey;
+                    aes.IV = param.IV;
+
+                    // Create a decryptor using the key and initialization vector
+                    ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                    // Use a MemoryStream to read the encrypted data
+                    using (MemoryStream memoryStream = new MemoryStream(param.Data))
                     {
-                        // Use a MemoryStream to store the decrypted data
-                        using (MemoryStream decryptedStream = new MemoryStream())
+                        // Use a CryptoStream to perform the decryption
+                        using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
                         {
-                            // Copy the decrypted data from the CryptoStream to the MemoryStream
-                            cryptoStream.CopyTo(decryptedStream);
-                            return decryptedStream.ToArray();
+                            // Use a MemoryStream to store the decrypted data
+                            using (MemoryStream decryptedStream = new MemoryStream())
+                            {
+                                // Copy the decrypted data from the CryptoStream to the MemoryStream
+                                cryptoStream.CopyTo(decryptedStream);
+                                return decryptedStream.ToArray();
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }
