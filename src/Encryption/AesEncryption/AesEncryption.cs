@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
+using SafeCrypt.src.Helpers;
 
-namespace SafeCrypt
+namespace SafeCrypt.src.Encrypt.AesEncryption
 {
     public class AesEncryption : BaseAesEncryption
     {
@@ -116,7 +117,7 @@ namespace SafeCrypt
 
             if (secretKey == null || secretKey.Length <= 0)
                 throw new ArgumentNullException(nameof(secretKey));
-        }   
+        }
     }
 
     public class AesEncryptionData

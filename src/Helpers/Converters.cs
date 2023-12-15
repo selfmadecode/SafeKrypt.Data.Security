@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace SafeCrypt
+namespace SafeCrypt.src.Helpers
 {
     public static class Converters
     {
