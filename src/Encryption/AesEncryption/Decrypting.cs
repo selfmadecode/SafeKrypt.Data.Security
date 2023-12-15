@@ -1,8 +1,6 @@
 ﻿using SafeCrypt.src.Encrypt.AesEncryption;
 using SafeCrypt.src.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SafeCrypt.src.Encryption.AesEncryption
 {

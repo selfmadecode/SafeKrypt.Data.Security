@@ -2,7 +2,6 @@
 using System.Text;
 using SafeCrypt.src.Helpers;
 using SafeCrypt.src.Encryption.AesEncryption.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace SafeCrypt.src.Encrypt.AesEncryption
 {
@@ -34,7 +33,6 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         public byte[] Encrypt(StringEncryptionParameters param)
         {
             Validators.ValidateNotNull(param);
-
 
             var byteEncryptionParameters = new ByteEncryptionParameters
             {
@@ -167,12 +165,7 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
 
             return cipherText.BytesToString();
         }
-
-        // needs methods that would accept aes mode
-        //public byte[] AesEncrypt(byte[] data, byte[] key, byte[] iv, ReturnType returnType)
-        //{
-
-        //}     
+                    
 
         private void NullChecks(string data, string secretKey)
         {
