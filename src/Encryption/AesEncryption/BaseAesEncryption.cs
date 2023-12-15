@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SafeCrypt.src.Encryption.AesEncryption.Models;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -9,9 +10,9 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// <summary>
         /// Encrypts the provided data using the Advanced Encryption Standard (AES) algorithm.
         /// </summary>
-        /// <param name="data">The data to be encrypted.</param>
-        /// <param name="key">The secret key used for encryption.</param>
-        /// <param name="iv">The initialization vector used for encryption.</param>
+        /// <param name="param.Data">The data to be encrypted.</param>
+        /// <param name="param.SecretKey">The secret key used for encryption.</param>
+        /// <param name="param.IV">The initialization vector used for encryption.</param>
         /// <returns>The encrypted data as a byte array.</returns>
         /// <remarks>
         /// The method uses the AES algorithm to encrypt the input data with the provided key and initialization vector.
@@ -22,7 +23,7 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// <exception cref="Exception">
         /// Thrown for general encryption-related exceptions.
         /// </exception>
-        public virtual byte[] EncryptAES(byte[] data, byte[] key, byte[] iv)
+        public virtual byte[] EncryptAES(ByteEncryptionParameters param)
         {
             try
             {
@@ -30,8 +31,8 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
                 using (Aes aes = Aes.Create())
                 {
                     // Set the key and initialization vector
-                    aes.Key = key;
-                    aes.IV = iv;
+                    aes.Key = param.SecretKey;
+                    aes.IV = param.IV;
                     // Create an encryptor using the key and initialization vector
                     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
@@ -42,7 +43,7 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
                         using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
                         {
                             // Write the data to be encrypted to the CryptoStream
-                            cryptoStream.Write(data, 0, data.Length);
+                            cryptoStream.Write(param.Data, 0, param.Data.Length);
                             cryptoStream.FlushFinalBlock();
 
                             // Return the encrypted data as a byte array
