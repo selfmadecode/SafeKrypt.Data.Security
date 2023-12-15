@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace SafeCrypt.src.Encryption.AesEncryption.Models
 {
@@ -25,27 +28,25 @@ namespace SafeCrypt.src.Encryption.AesEncryption.Models
         [Required]
         public byte[] IV { get; set; }
     }
-        
 
-    public class StringEncryptionParameters
+    public class ByteDecryptionParameters
     {
         /// <summary>
         /// Gets or sets the data to be encrypted.
         /// </summary>
         [Required]
-        public string Data { get; set; }
+        public byte[] Data { get; set; }
 
         /// <summary>
         /// Gets or sets the secret key used for encryption.
         /// </summary>
         [Required]
-        public string SecretKey { get; set; }
+        public byte[] SecretKey { get; set; }
 
         /// <summary>
         /// Gets or sets the initialization vector (IV) used for encryption.
         /// </summary>
         [Required]
-        public string IV { get; set; }
+        public byte[] IV { get; set; }
     }
-
 }

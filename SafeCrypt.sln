@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33214.272
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCrypt", "SafeCrypt.csproj", "{204CA507-752E-43A6-A094-794E40ABAE1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeCrypt", "SafeCrypt.csproj", "{204CA507-752E-43A6-A094-794E40ABAE1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "safecrypt-testapp", "..\safecrypt-testapp\safecrypt-testapp.csproj", "{76D17C56-5643-4148-A504-8D6E24D24CAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{204CA507-752E-43A6-A094-794E40ABAE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{204CA507-752E-43A6-A094-794E40ABAE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{204CA507-752E-43A6-A094-794E40ABAE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Text;
-using SafeCrypt.src.Helpers;
+using SafeCrypt.AesEncryption;
+using SafeCrypt.Helpers;
+using SafeCrypt.Models;
 using SafeCrypt.src.Encryption.AesEncryption.Models;
 
-namespace SafeCrypt.src.Encrypt.AesEncryption
+namespace SafeCrypt.AESEncryption
 {
-    public class Encrypting : BaseAesEncryption
+    public class AesEncryption : BaseAesEncryption
     {
         /// <summary>
         /// Encrypts the provided data using the specified secret key and initialization vector (IV).
@@ -21,160 +22,118 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// <param name="secretKey">The secret key used for encryption.</param>
         /// <param name="iv">The initialization vector used for encryption.</param>
         /// <returns>The encrypted data as a byte array.</returns>
-        public byte[] Encrypt(ByteEncryptionParameters param)
+        public EncryptionData EncryptToHexString(EncryptionParameters param)
         {
+            var responseData = new EncryptionData();
+
             Validators.ValidateNotNull(param);
+
+            // validate is base64
+            if (!Validators.IsBase64String(param.SecretKey))
+            {
+                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
+                return responseData;
+            }
+
+            if (!Validators.IsBase64String(param.IV))
+            {
+                AddError(responseData, $"IV: {param.IV} is not a base64 string");
+                return responseData;
+            }
+            // Convert input string to bytes
+            byte[] dataBytes = param.IV.ConvertKeysToBytes();
+
+            // Validate block size based on AES algorithm's requirements
+            if (!Validators.IsValidBlockSize(dataBytes.Length))
+            {
+                AddError(responseData, $"IV: {param.IV} is not a valid block size for this algorithm");
+                return responseData;
+            }
 
             // Delegate the encryption to the underlying AES encryption method
-            return EncryptAES(param);
-        }
-
-        
-        public byte[] Encrypt(StringEncryptionParameters param)
-        {
-            Validators.ValidateNotNull(param);
-
             var byteEncryptionParameters = new ByteEncryptionParameters
             {
-                SecretKey = param.SecretKey.ConvertKeysToBytes(),
-                IV = param.IV.ConvertKeysToBytes(),
-                Data = param.Data.HexadecimalStringToByteArray()
+                SecretKey = Convert.FromBase64String(param.SecretKey),
+                IV = dataBytes,
+                Data = param.DataToEncrypt.ConvertToHexString().HexadecimalStringToByteArray()
             };
 
-            return EncryptAES(byteEncryptionParameters);
-        }
+            var response = EncryptAES(byteEncryptionParameters);
 
+            return new EncryptionData
+            {
+                EncryptedData = response.ByteArrayToHexString(),
+                Iv = param.IV,
+                SecretKey = param.SecretKey
+            };
+        }
+              
+        
         /// <summary>
         /// Encrypts the provided string data using the Advanced Encryption Standard (AES) algorithm.
         /// </summary>
-        /// <param name="data">The string data to be encrypted.</param>
-        /// <param name="secretKey">The secret key used for encryption.</param>
-        /// <returns>An <see cref="AesEncrypted"/> object containing the encrypted data and initialization vector (IV).</returns>
+        /// <param name="dataToBeEncrypted">The string data to be encrypted.</param>
+        /// <param name="base64secretKey">The Base64-encoded secret key used for encryption.</param>
+        /// <returns>An <see cref="EncryptionData"/> object containing the encrypted data and initialization vector (IV) as bas64 strings.</returns>
         /// <remarks>
-        /// This method encrypts the input string data using the specified secret key and a randomly generated initialization
-        /// vector (IV) for AES encryption in Cipher Block Chaining (CBC) mode. The resulting encrypted data and IV are encapsulated
-        /// in an <see cref="AesEncrypted"/> object, which is then returned.
+        /// This method validates the Base64 encoding of the secret key using <see cref="Validators.IsBase64String"/>.
+        /// If the key is not valid, the method returns null. Otherwise, it proceeds with the encryption process.
+        /// The method generates a random 16-byte IV for AES in CBC mode, converts the input data to a byte array,
+        /// and then encrypts the data using AES. The result is encapsulated in an <see cref="EncryptionData"/> object
+        /// containing the encrypted data and IV, both Base64-encoded.
         /// </remarks>
-        /// <param name="data">The string data to be encrypted.</param>
-        /// <param name="secretKey">The secret key used for encryption.</param>
-        /// <returns>An <see cref="AesEncrypted"/> object containing the encrypted data and initialization vector (IV).</returns>
+        /// <param name="dataToBeEncrypted">The string data to be encrypted.</param>
+        /// <param name="base64secretKey">The Base64-encoded secret key used for encryption.</param>
+        /// <returns>An <see cref="EncryptionData"/> object containing the encrypted data and initialization vector (IV).</returns>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if the input data or secret key is null.
+        /// Thrown if the input data or base64secretKey is null.
         /// </exception>
-        public EncryptionData Encrypt(string data, string secretKey)
+        /// <exception cref="FormatException">
+        /// Thrown if the base64secretKey is not a valid Base64-encoded string.
+        /// </exception>
+        public EncryptionData EncryptToBase64String(string dataToBeEncrypted, string base64secretKey)
         {
-            NullChecks(data, secretKey);
+            // validate is base64
+            if (!Validators.IsBase64String(base64secretKey))
+            {
+                return null;
+            }
+
+            NullChecks(data: dataToBeEncrypted, base64secretKey);
 
             // Generate a random 16-byte IV for AES in CBC mode
-            var aesIv = GenerateRandomIVKeyAsBytes(16);
-
-            //var aesKey = Encoding.UTF8.GetBytes(secretKey);
-            //var aesData = data.HexadecimalStringToByteArray();
+            var aesIv = KeyGenerators.GenerateRandomIVKeyAsBytes(16);
 
             var byteEncryptionParameters = new ByteEncryptionParameters
             {
-                SecretKey = Encoding.UTF8.GetBytes(secretKey),
+                SecretKey = Convert.FromBase64String(base64secretKey),
                 IV = aesIv,
-                Data = data.HexadecimalStringToByteArray()
+                Data = dataToBeEncrypted.ConvertToHexString().HexadecimalStringToByteArray()
             };
 
-            //var response = EncryptAES(aesData, aesKey, aesIv);
             var response = EncryptAES(byteEncryptionParameters);
 
-            var responseData = new EncryptionData
+            return new EncryptionData
             {
-                Data = response,
-                Iv = aesIv
+                EncryptedData = Convert.ToBase64String(response),
+                Iv = Convert.ToBase64String(aesIv),
+                SecretKey = base64secretKey
             };
-
-            return responseData;
         }
-
-        /// <summary>
-        /// Encrypts the provided byte data using the Advanced Encryption Standard (AES) algorithm
-        /// and returns the encrypted data as a hexadecimal string.
-        /// </summary>
-        /// <param name="param">The parameters containing the byte data, secret key, and initialization vector (IV).</param>
-        /// <returns>The encrypted data represented as a hexadecimal string.</returns>
-        /// <remarks>
-        /// This method encrypts the input byte data using the specified secret key and initialization vector (IV)
-        /// using the AES algorithm. The resulting encrypted data is then converted to a hexadecimal string before being
-        /// returned. The encryption parameters are encapsulated in a <see cref="ByteEncryptionParameters"/> object.
-        /// </remarks>
-        /// <param name="param">The parameters containing the byte data, secret key, and initialization vector (IV).</param>
-        /// <returns>The encrypted data represented as a hexadecimal string.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if the input parameters or byte data is null.
-        /// </exception>
-        public string EncryptByteToHexString(ByteEncryptionParameters param)
-        {
-            Validators.ValidateNotNull(param);
-
-            var cipherText = EncryptAES(param);
-
-            // Convert the encrypted data to a hexadecimal string
-            return cipherText.ByteArrayToHexString();
-        }
-
-        /// <summary>
-        /// Encrypts the provided byte data using the Advanced Encryption Standard (AES) algorithm
-        /// and returns the encrypted data as a Base64-encoded string.
-        /// </summary>
-        /// <param name="param">The parameters containing the byte data, secret key, and initialization vector (IV).</param>
-        /// <returns>The encrypted data represented as a Base64-encoded string.</returns>
-        /// <remarks>
-        /// This method encrypts the input byte data using the specified secret key and initialization vector (IV)
-        /// using the AES algorithm. The resulting encrypted data is then converted to a Base64-encoded string before
-        /// being returned. The encryption parameters are encapsulated in a <see cref="ByteEncryptionParameters"/> object.
-        /// </remarks>
-        /// <param name="param">The parameters containing the byte data, secret key, and initialization vector (IV).</param>
-        /// <returns>The encrypted data represented as a Base64-encoded string.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if the input parameters or byte data is null.
-        /// </exception>
-        public string EncryptByteToBase64String(ByteEncryptionParameters param)
-        {
-            Validators.ValidateNotNull(param);
-
-            var cipherText = EncryptAES(param);
-
-            return Convert.ToBase64String(cipherText);
-        }
-
-        /// <summary>
-        /// Encrypts the provided byte data using the Advanced Encryption Standard (AES) algorithm
-        /// and returns the encrypted data as a string using UTF-8 encoding.
-        /// </summary>
-        /// <param name="param">The parameters containing the byte data, secret key, and initialization vector (IV).</param>
-        /// <returns>The encrypted data represented as a string using UTF-8 encoding.</returns>
-        /// <remarks>
-        /// This method encrypts the input byte data using the specified secret key and initialization vector (IV)
-        /// using the AES algorithm. The resulting encrypted data is then converted to a string using UTF-8
-        /// encoding before being returned. The encryption parameters are encapsulated in a <see cref="ByteEncryptionParameters"/> object.
-        /// </remarks>
-        /// <param name="param">The parameters containing the byte data, secret key, and initialization vector (IV).</param>
-        /// <returns>The encrypted data represented as a string using UTF-8 encoding.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if the input parameters or byte data is null.
-        /// </exception>
-        public string EncryptByteToString(ByteEncryptionParameters param)
-        {
-            Validators.ValidateNotNull(param);
-
-            var cipherText = EncryptAES(param);
-
-            return cipherText.BytesToString();
-        }
-                    
 
         private void NullChecks(string data, string secretKey)
         {
             if (data == null || data.Length <= 0)
                 throw new ArgumentNullException(nameof(data));
 
-            if (secretKey == null || secretKey.Length <= 0)
+            if (secretKey == null )
                 throw new ArgumentNullException(nameof(secretKey));
         }
-    }
 
+        private void AddError(EncryptionData responseData, string error)
+        {
+            responseData.HasError = true;
+            responseData.Errors.Add(error);
+        }        
+    }
 }

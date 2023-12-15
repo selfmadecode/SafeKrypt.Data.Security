@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace SafeCrypt.src.Helpers
+namespace SafeCrypt.Helpers
 {
     public static class Converters
     {
@@ -37,10 +37,37 @@ namespace SafeCrypt.src.Helpers
             }
             return output;
         }
+        /// <summary>
+        /// Converts a string to its hexadecimal representation.
+        /// </summary>
+        /// <param name="input">The input string to convert.</param>
+        /// <returns>The hexadecimal representation of the input string.</returns>
 
-        public static byte[] ConvertKeysToBytes(this string data)
+        public static string ConvertToHexString(this string input)
         {
-            return Encoding.UTF8.GetBytes(data);
+            byte[] byteArray = Encoding.UTF8.GetBytes(input);
+            StringBuilder hexBuilder = new StringBuilder(byteArray.Length * 2);
+
+            foreach (byte b in byteArray)
+            {
+                hexBuilder.AppendFormat("{0:X2}", b);
+            }
+
+            return hexBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Converts a string to bytes and validates the resulting byte array.
+        /// </summary>
+        /// <param name="input">The input string to convert.</param>
+        /// <returns>The byte array representation of the input string if valid; otherwise, null.</returns>
+        public static byte[] ConvertKeysToBytes(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return null;
+            }
+            return Encoding.UTF8.GetBytes(input);
         }
     }
 }
