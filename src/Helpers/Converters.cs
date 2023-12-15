@@ -56,9 +56,18 @@ namespace SafeCrypt.src.Helpers
             return hexBuilder.ToString();
         }
 
-        public static byte[] ConvertKeysToBytes(this string data)
+        /// <summary>
+        /// Converts a string to bytes and validates the resulting byte array.
+        /// </summary>
+        /// <param name="input">The input string to convert.</param>
+        /// <returns>The byte array representation of the input string if valid; otherwise, null.</returns>
+        public static byte[] ConvertKeysToBytes(this string input)
         {
-            return Encoding.UTF8.GetBytes(data);
-        }        
+            if (string.IsNullOrEmpty(input))
+            {
+                return null;
+            }
+            return Encoding.UTF8.GetBytes(input);
+        }
     }
 }
