@@ -2,6 +2,7 @@
 using System.Text;
 using System.Security.Cryptography;
 using SafeCrypt.src.Helpers;
+using SafeCrypt.src.Encryption.AesEncryption.Models;
 
 namespace SafeCrypt.src.Encrypt.AesEncryption
 {
@@ -120,9 +121,4 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         }
     }
 
-    public class AesEncryptionData
-    {
-        public byte[] Data { get; set; }
-        public byte[] Iv { get; set; }
-    }
 }
