@@ -1,8 +1,8 @@
-﻿using SafeCrypt.src.Encrypt.AesEncryption;
+﻿using SafeCrypt.AesEncryption;
 using SafeCrypt.src.Helpers;
 using System;
 
-namespace SafeCrypt.src.Encryption.AesEncryption
+namespace SafeCrypt.Decrypt
 {
     public class Decrypting : BaseAesEncryption
     {
