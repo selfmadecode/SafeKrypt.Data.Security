@@ -83,5 +83,29 @@ namespace SafeCrypt.src.Helpers
                 return false;
             }
         }
+
+        /// <summary>
+        /// Validates whether the block size is valid for the AES algorithm.
+        /// </summary>
+        /// <param name="dataLength">The length of the data to be encrypted.</param>
+        /// <returns>True if the block size is valid; otherwise, false.</returns>
+        public static bool IsValidBlockSize(int dataLength)
+        {
+            // AES block size is 128 bits (16 bytes)
+            return dataLength % 16 == 0;
+        }
+
+        /// <summary>
+        /// Validates whether the byte array is valid for a specific algorithm.
+        /// </summary>
+        /// <param name="byteArray">The byte array to validate.</param>
+        /// <returns>True if the byte array is valid; otherwise, false.</returns>
+        private static bool IsValidByteArray(byte[] byteArray)
+        {
+            // Add your specific validation criteria here
+            // For example, you might check for non-null, non-empty, or other constraints
+
+            return byteArray != null && byteArray.Length > 0;
+        }
     }
 }
