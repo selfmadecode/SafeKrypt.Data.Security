@@ -1,7 +1,7 @@
 ﻿using System;
-using SafeCrypt.src.Helpers;
 using SafeCrypt.src.Encryption.AesEncryption.Models;
 using SafeCrypt.AesEncryption;
+using SafeCrypt.Helpers;
 
 namespace SafeCrypt.Encrypt
 {

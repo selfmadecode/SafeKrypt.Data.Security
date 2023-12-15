@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SafeCrypt.src.Helpers
+namespace SafeCrypt.Helpers
 {
     public static class Validators
     {

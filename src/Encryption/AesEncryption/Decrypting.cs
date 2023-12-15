@@ -1,5 +1,5 @@
 ﻿using SafeCrypt.AesEncryption;
-using SafeCrypt.src.Helpers;
+using SafeCrypt.Helpers;
 using System;
 
 namespace SafeCrypt.Decrypt

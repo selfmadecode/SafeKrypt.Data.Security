@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace SafeCrypt.src.Helpers
+namespace SafeCrypt.Helpers
 {
     public static class Converters
     {
