@@ -2,7 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Nextgen.Org.$(AssemblyName)</PackageId>
+    <Title>SafeCrypt - Simple Encryption Library for C#</Title>
+    <Authors>selfmade</Authors>
+    <Company>NextGen.$(Authors)</Company>
+    <Description>This C# library provides methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm. It offers a simple interface for users to encrypt and decrypt data with ease.</Description>
+    <Copyright>Nextgen</Copyright>
+    <PackageProjectUrl>https://github.com/selfmadecode/SafeCrypt</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/selfmadecode/SafeCrypt</RepositoryUrl>
+    <PackageTags>encryption;aes;cryptography;base64;aes</PackageTags>
+    <PackageIcon>safecrypticon.jpg</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Downloads\safecrypticon.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
