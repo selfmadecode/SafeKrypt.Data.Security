@@ -61,7 +61,7 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// <exception cref="ArgumentNullException">
         /// Thrown if the input data or secret key is null.
         /// </exception>
-        public AesEncrypted Encrypt(string data, string secretKey)
+        public EncryptionData Encrypt(string data, string secretKey)
         {
             NullChecks(data, secretKey);
 
@@ -81,7 +81,7 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
             //var response = EncryptAES(aesData, aesKey, aesIv);
             var response = EncryptAES(byteEncryptionParameters);
 
-            var responseData = new AesEncrypted
+            var responseData = new EncryptionData
             {
                 Data = response,
                 Iv = aesIv
