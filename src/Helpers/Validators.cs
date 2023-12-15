@@ -37,5 +37,28 @@ namespace SafeCrypt.src.Helpers
                 throw new ArgumentNullException(nameof(parameters.IV), "IV property cannot be null.");
             }
         }
+
+        public static void ValidateNotNull(StringEncryptionParameters parameters)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters), "StringEncryptionParameters instance cannot be null.");
+            }
+
+            if (parameters.Data == null)
+            {
+                throw new ArgumentNullException(nameof(parameters.Data), "Data property cannot be null.");
+            }
+
+            if (parameters.SecretKey == null)
+            {
+                throw new ArgumentNullException(nameof(parameters.SecretKey), "SecretKey property cannot be null.");
+            }
+
+            if (parameters.IV == null)
+            {
+                throw new ArgumentNullException(nameof(parameters.IV), "IV property cannot be null.");
+            }
+        }
     }
 }
