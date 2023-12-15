@@ -2,6 +2,7 @@
 using System.Text;
 using SafeCrypt.src.Helpers;
 using SafeCrypt.src.Encryption.AesEncryption.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SafeCrypt.src.Encrypt.AesEncryption
 {
@@ -23,6 +24,8 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// <returns>The encrypted data as a byte array.</returns>
         public byte[] Encrypt(ByteEncryptionParameters param)
         {
+            Validators.ValidateNotNull(param);
+
             // Delegate the encryption to the underlying AES encryption method
             return EncryptAES(param);
         }
@@ -30,7 +33,8 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         
         public byte[] Encrypt(StringEncryptionParameters param)
         {
-            NullChecks(param.Data, param.SecretKey, param.IV);
+            Validators.ValidateNotNull(param);
+
 
             var byteEncryptionParameters = new ByteEncryptionParameters
             {
@@ -87,6 +91,7 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
 
             return responseData;
         }
+
         /// <summary>
         /// Encrypts the provided byte data using the Advanced Encryption Standard (AES) algorithm
         /// and returns the encrypted data as a hexadecimal string.
@@ -105,6 +110,8 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// </exception>
         public string EncryptByteToHexString(ByteEncryptionParameters param)
         {
+            Validators.ValidateNotNull(param);
+
             var cipherText = EncryptAES(param);
 
             // Convert the encrypted data to a hexadecimal string
@@ -129,6 +136,8 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// </exception>
         public string EncryptByteToBase64String(ByteEncryptionParameters param)
         {
+            Validators.ValidateNotNull(param);
+
             var cipherText = EncryptAES(param);
 
             return Convert.ToBase64String(cipherText);
@@ -152,6 +161,8 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
         /// </exception>
         public string EncryptByteToString(ByteEncryptionParameters param)
         {
+            Validators.ValidateNotNull(param);
+
             var cipherText = EncryptAES(param);
 
             return cipherText.BytesToString();
@@ -163,16 +174,13 @@ namespace SafeCrypt.src.Encrypt.AesEncryption
 
         //}     
 
-        private void NullChecks(string data, string secretKey, string iv = "")
+        private void NullChecks(string data, string secretKey)
         {
             if (data == null || data.Length <= 0)
                 throw new ArgumentNullException(nameof(data));
 
             if (secretKey == null || secretKey.Length <= 0)
                 throw new ArgumentNullException(nameof(secretKey));
-
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException(nameof(iv));
         }
     }
 
