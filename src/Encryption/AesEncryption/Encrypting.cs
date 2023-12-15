@@ -4,9 +4,9 @@ using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 using SafeCrypt.src.Encryption.AesEncryption.Models;
 
-namespace SafeCrypt.Encrypt
+namespace SafeCrypt.AESEncryption
 {
-    public class Encrypting : BaseAesEncryption
+    public class AesEncryption : BaseAesEncryption
     {
         /// <summary>
         /// Encrypts the provided data using the specified secret key and initialization vector (IV).
