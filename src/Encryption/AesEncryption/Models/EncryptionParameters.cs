@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace SafeCrypt.src.Encryption.AesEncryption.Models
+namespace SafeCrypt.Models
 {
     public class EncryptionParameters
     {

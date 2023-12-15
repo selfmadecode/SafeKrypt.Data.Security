@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SafeCrypt.src.Encryption.AesEncryption.Models
+namespace SafeCrypt.Models
 {
     /// <summary>
     /// Represents the data and initialization vector (IV) used in encryption.
