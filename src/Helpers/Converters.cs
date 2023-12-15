@@ -38,5 +38,10 @@ namespace SafeCrypt.src.Helpers
             }
             return output;
         }
+
+        public static byte[] ConvertKeysToBytes(this string data)
+        {
+            return Encoding.UTF8.GetBytes(data);
+        }
     }
 }
