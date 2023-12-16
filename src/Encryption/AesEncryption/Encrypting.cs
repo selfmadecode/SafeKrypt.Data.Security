@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Security.Cryptography;
 using SafeCrypt.AesEncryption;
 using SafeCrypt.Helpers;
 using SafeCrypt.Models;
-using SafeCrypt.src.Encryption.AesEncryption.Models;
 
 namespace SafeCrypt.AESEncryption
 {
@@ -26,20 +26,13 @@ namespace SafeCrypt.AESEncryption
         {
             var responseData = new EncryptionData();
 
-            Validators.ValidateNotNull(param);
+            var parameterValidation = ValidateEncryptionParameters(param);
 
-            // validate is base64
-            if (!Validators.IsBase64String(param.SecretKey))
+            if (parameterValidation.HasError)
             {
-                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
-                return responseData;
+                return parameterValidation;
             }
 
-            if (!Validators.IsBase64String(param.IV))
-            {
-                AddError(responseData, $"IV: {param.IV} is not a base64 string");
-                return responseData;
-            }
             // Convert input string to bytes
             byte[] dataBytes = param.IV.ConvertKeysToBytes();
 
@@ -67,8 +60,7 @@ namespace SafeCrypt.AESEncryption
                 SecretKey = param.SecretKey
             };
         }
-              
-        
+
         /// <summary>
         /// Encrypts the provided string data using the Advanced Encryption Standard (AES) algorithm.
         /// </summary>
@@ -119,6 +111,26 @@ namespace SafeCrypt.AESEncryption
                 Iv = Convert.ToBase64String(aesIv),
                 SecretKey = base64secretKey
             };
+        }
+
+        private EncryptionData ValidateEncryptionParameters(EncryptionParameters param)
+        {
+            var responseData = new EncryptionData();
+
+            Validators.ValidateNotNull(param);
+
+            // validate is base64
+            if (!Validators.IsBase64String(param.SecretKey))
+            {
+                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
+            }
+
+            if (!Validators.IsBase64String(param.IV))
+            {
+                AddError(responseData, $"IV: {param.IV} is not a base64 string");
+            }
+
+            return responseData;
         }
 
         private void NullChecks(string data, string secretKey)
