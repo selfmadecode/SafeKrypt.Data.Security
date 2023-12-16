@@ -1,20 +1,58 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>Nextgen.Org.$(AssemblyName)</PackageId>
+    <PackageId>$(AssemblyName).Data.Security</PackageId>
     <Title>SafeCrypt - Simple Encryption Library for C#</Title>
     <Authors>selfmade</Authors>
-    <Company>NextGen.$(Authors)</Company>
-    <Description>This C# library provides methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm. It offers a simple interface for users to encrypt and decrypt data with ease.</Description>
-    <Copyright>Nextgen</Copyright>
+    <Company>NextGen</Company>
+    <Description>This C# library provides methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm, and more. It offers a simple interface for users to encrypt and decrypt data with ease.</Description>
+    <Copyright>Raphael Anyanwu</Copyright>
     <PackageProjectUrl>https://github.com/selfmadecode/SafeCrypt</PackageProjectUrl>
     <RepositoryUrl>https://github.com/selfmadecode/SafeCrypt</RepositoryUrl>
     <PackageTags>encryption;aes;cryptography;base64;aes</PackageTags>
     <PackageIcon>safecrypticon.jpg</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>MitLicense.txt</PackageLicenseFile>
+    <PackageReleaseNotes>SafeCrypt Library - Release Notes
+
+Version 1.0.0
+
+Highlights:
+- New Features:
+  - `EncryptToHexString`: Easily encrypt data with a hexadecimal string output.
+  - `DecryptFromBase64String`: Decrypt Base64-encoded string data with validation.
+  - `GenerateAesKey`: Generate a random AES key of a specified size.
+
+- Improvements:
+  - Enhanced validation checks for input parameters in encryption and decryption methods.
+  - Improved error handling for decryption, including padding errors.
+
+- Bug Fixes:
+  - Resolved issues related to padding errors during decryption.
+
+- Documentation:
+  - Updated and expanded the README file for better understanding and usage instructions.
+  - Added XML documentation comments to improve code documentation.
+
+- Security:
+  - Improved key validation to ensure secure encryption and decryption.
+
+Upgrade Command:
+dotnet add package SafeCrypt --version 1.0.0
+
+Feedback and Contributions:
+We appreciate your feedback and contributions! If you encounter any issues or have suggestions, please create an issue on GitHub: https://github.com/selfmadecode/SafeCrypt/issues
+
+Thank you for using the SafeCrypt Library!</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\Downloads\MitLicense.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\..\..\Downloads\safecrypticon.jpg">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -23,6 +61,13 @@
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
