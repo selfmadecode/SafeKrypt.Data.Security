@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SafeCrypt.src.Enums
+namespace SafeCrypt.Enums
 {
     public enum ReturnType
     {
