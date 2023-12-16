@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SafeCrypt.AesEncryption
 {
-    public class BaseAesEncryption
+    internal class BaseAesEncryption
     {
         /// <summary>
         /// Encrypts the provided data using the Advanced Encryption Standard (AES) algorithm.
@@ -25,7 +25,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="Exception">
         /// Thrown for general encryption-related exceptions.
         /// </exception>
-        public virtual byte[] EncryptAES(ByteEncryptionParameters param)
+        internal static byte[] EncryptAES(ByteEncryptionParameters param)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="ArgumentNullException">
         /// Thrown if the input encrypted data, key, or initialization vector is null.
         /// </exception>
-        public static byte[] DecryptAES(ByteDecryptionParameters param)
+        internal static byte[] DecryptAES(ByteDecryptionParameters param)
         {
             try
             {

@@ -8,7 +8,7 @@ namespace SafeCrypt.src.Encryption.AesEncryption.Models
     /// <summary>
     /// Represents the parameters required for encryption.
     /// </summary>
-    public class ByteEncryptionParameters
+    internal class ByteEncryptionParameters
     {
         /// <summary>
         /// Gets or sets the data to be encrypted.
@@ -29,7 +29,7 @@ namespace SafeCrypt.src.Encryption.AesEncryption.Models
         public byte[] IV { get; set; }
     }
 
-    public class ByteDecryptionParameters
+    internal class ByteDecryptionParameters
     {
         /// <summary>
         /// Gets or sets the data to be encrypted.
