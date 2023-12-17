@@ -1,4 +1,4 @@
-﻿using SafeCrypt.src.Encryption.AesEncryption.Models;
+﻿using SafeCrypt.Models;
 using System;
 using System.IO;
 using System.Reflection;
@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SafeCrypt.AesEncryption
 {
-    internal class BaseAesEncryption
+    public class BaseAesEncryption
     {
         /// <summary>
         /// Encrypts the provided data using the Advanced Encryption Standard (AES) algorithm.
