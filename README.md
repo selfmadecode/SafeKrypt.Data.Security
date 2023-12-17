@@ -39,7 +39,9 @@ Now, you can reference the SafeCrypt library in your C# project.
 To use the library in your C# application, instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
 
 ```csharp
-using SafeCrypt; 
+using SafeCrypt.AESDecryption;
+using SafeCrypt.AESEncryption;
+using SafeCrypt.Models; 
 
 class Program
 {
@@ -66,6 +68,56 @@ class Program
 
         Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
         Console.WriteLine($"Initialization Vector: {data.Iv}");
+    }
+}
+
+
+
+
+using SafeCrypt.AESDecryption;
+using SafeCrypt.AESEncryption;
+using SafeCrypt.Models; 
+
+class Program
+{
+    static void Main() 
+    {
+        var dataToEncrypt = "Data to Ebcrypt";
+
+        var iv = "gyrthusdgythisdg";
+        var secret = "hghjuytsdfraestwsgtere==";
+
+        var encryptionParam = new EncryptionParameters
+        {
+            DataToEncrypt = dataToEncrypt,
+            IV = iv,
+            SecretKey = secret
+        };
+
+        var encryptor = new AesEncryption();
+
+        var response = encryptor.EncryptToBase64String(encryptionParam.DataToEncrypt, secret);
+
+        Console.WriteLine(response.EncryptedData);
+        Console.WriteLine(response.Iv);
+        Console.WriteLine(response.SecretKey);
+
+
+
+        var decryptorParam = new DecryptionParameters
+        {
+            IV = response.Iv,
+            SecretKey = secret,
+            DataToDecrypt = response.EncryptedData
+        };
+
+
+        var decryptor = new AesDecryption();
+        var decryptionData = decryptor.DecryptFromBase64String(decryptorParam);
+
+        Console.WriteLine(decryptionData.DecryptedData);
+        Console.WriteLine(decryptionData.Iv);
+        Console.WriteLine(decryptionData.SecretKey);
     }
 }
 ```
