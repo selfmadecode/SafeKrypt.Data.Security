@@ -15,37 +15,27 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>MitLicense.txt</PackageLicenseFile>
-    <PackageReleaseNotes>SafeCrypt Library - Release Notes
+    <PackageReleaseNotes>SafeCrypt Library - Release Notes - Version 1.0.1
 
-Version 1.0.0
+This release (version 1.0.1) includes updates to the documentation and namespace changes. We have improved the README document to provide more comprehensive information about the library and made adjustments to the namespaces for better organization.
 
-Highlights:
-- New Features:
-  - `EncryptToHexString`: Easily encrypt data with a hexadecimal string output.
-  - `DecryptFromBase64String`: Decrypt Base64-encoded string data with validation.
-  - `GenerateAesKey`: Generate a random AES key of a specified size.
+Changes
 
-- Improvements:
-  - Enhanced validation checks for input parameters in encryption and decryption methods.
-  - Improved error handling for decryption, including padding errors.
+- Updated README document with detailed usage instructions, API references, and contribution guidelines.
+- Made changes to namespaces for better organization and clarity in the codebase.
 
-- Bug Fixes:
-  - Resolved issues related to padding errors during decryption.
+Bug Fixes
 
-- Documentation:
-  - Updated and expanded the README file for better understanding and usage instructions.
-  - Added XML documentation comments to improve code documentation.
-
-- Security:
-  - Improved key validation to ensure secure encryption and decryption.
+No bug fixes in this release.
 
 Upgrade Command:
-dotnet add package SafeCrypt --version 1.0.0
+dotnet add package SafeCrypt --version 1.0.1
 
 Feedback and Contributions:
 We appreciate your feedback and contributions! If you encounter any issues or have suggestions, please create an issue on GitHub: https://github.com/selfmadecode/SafeCrypt/issues
 
 Thank you for using the SafeCrypt Library!</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

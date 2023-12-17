@@ -72,7 +72,7 @@ class Program
 }
 
 
-
+-------------------------------------------------------------------------------------------------------
 
 using SafeCrypt.AESDecryption;
 using SafeCrypt.AESEncryption;
@@ -82,7 +82,7 @@ class Program
 {
     static void Main() 
     {
-        var dataToEncrypt = "Data to Ebcrypt";
+        var dataToEncrypt = "Data to Encrypt";
 
         var iv = "gyrthusdgythisdg";
         var secret = "hghjuytsdfraestwsgtere==";
