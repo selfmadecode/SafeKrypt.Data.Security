@@ -34,46 +34,40 @@ To use the SafeCrypt library in your C# project, follow these steps:
 
 Now, you can reference the SafeCrypt library in your C# project.
 
-## Usage
+## Basic Usage
 
-To use the library in your C# application, instantiate the `SafeCrypt` class and call the provided methods. Here's a simple example:
+To use the library in your C# application, instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
 
 ```csharp
-using SafeCrypt;
+using SafeCrypt; 
 
 class Program
 {
-    static void Main()
+    static void Main() 
     {
         var aesEncryptor = new AesEncryption();
-        var encryptedData = aesEncryptor.AesEncrypt("Hello, World!", "mySecretKey");
-        Console.WriteLine($"Encrypted Data: {encryptedData.Data}");
+        
+        var encryptedData = aesEncryptor.EncryptToBase64String("Hello, World!", "gdjdtsraewsuteastwerse=="
+        
+        Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
         Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
+
+        var aesDecryptor = new AesDecryption();
+
+        var parameterToDecrypt = new DecryptionParameters
+        {
+          DataToDecrypt = encryptedData.EncryptedData,
+          SecretKey = encryptedData.SecretKey,
+          IV = encryptedData.IV
+
+        };
+
+        var data = aesDecryptor.DecryptFromBase64String(parameterToDecrypt)
+
+        Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
+        Console.WriteLine($"Initialization Vector: {data.Iv}");
     }
 }
-```
-
-## API Reference
-
-### `AesEncryption`
-
-- `AesEncrypt(byte[] data, byte[] secretKey, byte[] iv): byte[]`
-  - Encrypts a byte array using AES algorithm.
-  - Parameters:
-    - `data`: The data to encrypt.
-    - `secretKey`: The secret key for encryption.
-    - `iv`: The initialization vector for encryption.
-  - Returns: The encrypted data.
-
-## Examples
-
-### Encrypting a String
-
-```csharp
-var aesEncryptor = new AesEncryption();
-var encryptionData = aesEncryptor.AesEncrypt("Hello, World!", "mySecretKey");
-Console.WriteLine($"Encrypted Data: {encryptionData.Data}");
-Console.WriteLine($"Initialization Vector: {encryptionData.Iv}");
 ```
 
 ## Contributing
