@@ -35,6 +35,7 @@ namespace SafeCrypt.Helpers
                 throw new ArgumentNullException(nameof(parameters.IV), "IV property cannot be null.");
             }
         }
+
         public static void ValidateNotNull(DecryptionParameters parameters)
         {
             if (parameters == null)

@@ -52,7 +52,7 @@ namespace SafeCrypt.AesEncryption
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -102,9 +102,8 @@ namespace SafeCrypt.AesEncryption
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
         }

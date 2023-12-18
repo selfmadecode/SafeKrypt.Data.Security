@@ -37,6 +37,7 @@ namespace SafeCrypt.Helpers
             }
             return output;
         }
+
         /// <summary>
         /// Converts a string to its hexadecimal representation.
         /// </summary>

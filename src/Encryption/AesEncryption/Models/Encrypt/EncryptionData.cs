@@ -23,6 +23,7 @@ namespace SafeCrypt.Models
         public string SecretKey { get; set; }
 
         public bool HasError { get; set; }
+
         public List<string> Errors { get; set; } = new List<string>();
     }
 }
