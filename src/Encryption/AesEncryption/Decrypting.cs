@@ -2,12 +2,13 @@
 using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace SafeCrypt.AESDecryption
 {
     public class AesDecryption : BaseAesEncryption
     {
-        public DecryptionData DeEncryptFromHexString(DecryptionParameters param)
+        public async Task<DecryptionData> DeEncryptFromHexString(DecryptionParameters param)
         {
             var responseData = new DecryptionData();
 
@@ -16,13 +17,13 @@ namespace SafeCrypt.AESDecryption
             // validate is base64
             if (!Validators.IsBase64String(param.SecretKey))
             {
-                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
+                Validators.AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
                 return responseData;
             }
 
             if (!Validators.IsBase64String(param.IV))
             {
-                AddError(responseData, $"IV: {param.IV} is not a base64 string");
+                Validators.AddError(responseData, $"IV: {param.IV} is not a base64 string");
                 return responseData;
             }
             // Convert input string to bytes
@@ -31,7 +32,7 @@ namespace SafeCrypt.AESDecryption
             // Validate block size based on AES algorithm's requirements
             if (!Validators.IsValidBlockSize(dataBytes.Length))
             {
-                AddError(responseData, $"IV: {param.IV} is not a valid block size for this algorithm");
+                Validators.AddError(responseData, $"IV: {param.IV} is not a valid block size for this algorithm");
                 return responseData;
             }
 
@@ -43,32 +44,32 @@ namespace SafeCrypt.AESDecryption
                 Data = param.DataToDecrypt.HexadecimalStringToByteArray()
             };
 
-            var response = DecryptAES(byteEncryptionParameters);
+            var response = await DecryptAESAsync(byteEncryptionParameters);
 
             return new DecryptionData
             {
                 DecryptedData = response.BytesToString(),
-                Iv = param.IV,
+                IV = param.IV,
                 SecretKey = param.SecretKey
             };
         }
 
-        public DecryptionData DecryptFromBase64String(DecryptionParameters param)
+        public async Task<DecryptionData> DecryptFromBase64String(DecryptionParameters param)
         {
             var responseData = new DecryptionData();
 
             Validators.ValidateNotNull(param);
-            
+
 
             if (!Validators.IsBase64String(param.SecretKey))
             {
-                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
+                Validators.AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
                 return responseData;
             }
 
             if (!Validators.IsBase64String(param.IV))
             {
-                AddError(responseData, $"IV: {param.IV} is not a base64 string");
+                Validators.AddError(responseData, $"IV: {param.IV} is not a base64 string");
                 return responseData;
             }
 
@@ -81,19 +82,19 @@ namespace SafeCrypt.AESDecryption
                     Data = Convert.FromBase64String(param.DataToDecrypt)
                 };
 
-                var response = DecryptAES(byteDecryptionParameters);
+                var response = await DecryptAESAsync(byteDecryptionParameters);
 
                 return new DecryptionData
                 {
                     DecryptedData = response.BytesToString(),
-                    Iv = param.IV,
+                    IV = param.IV,
                     SecretKey = param.SecretKey
                 };
             }
             catch (Exception ex)
             {
                 // Handle decryption failure or padding errors
-                AddError(responseData, $"Decryption error: {ex.Message}");
+                Validators.AddError(responseData, $"Decryption error: {ex.Message}");
                 return responseData;
             }
         }
@@ -117,10 +118,6 @@ namespace SafeCrypt.AESDecryption
             return (secretKey.ConvertKeysToBytes(), iv.ConvertKeysToBytes());
         }
 
-        private void AddError(DecryptionData responseData, string error)
-        {
-            responseData.HasError = true;
-            responseData.Errors.Add(error);
-        }
+
     }
 }

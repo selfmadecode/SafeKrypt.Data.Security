@@ -3,9 +3,8 @@ using System.Security.Cryptography;
 
 namespace SafeCrypt.Helpers
 {
-    public class KeyGenerators
+    public static class KeyGenerators
     {
-
         /// <summary>
         /// Generates an array of random bytes using a cryptographically secure random number generator.
         /// </summary>

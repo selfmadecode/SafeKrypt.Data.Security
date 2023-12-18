@@ -30,13 +30,13 @@ namespace SafeCrypt.AESEncryption
             // validate is base64
             if (!Validators.IsBase64String(param.SecretKey))
             {
-                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
+                Validators.AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
                 return responseData;
             }
 
             if (!Validators.IsBase64String(param.IV))
             {
-                AddError(responseData, $"IV: {param.IV} is not a base64 string");
+                Validators.AddError(responseData, $"IV: {param.IV} is not a base64 string");
                 return responseData;
             }
             // Convert input string to bytes
@@ -45,7 +45,7 @@ namespace SafeCrypt.AESEncryption
             // Validate block size based on AES algorithm's requirements
             if (!Validators.IsValidBlockSize(dataBytes.Length))
             {
-                AddError(responseData, $"IV: {param.IV} is not a valid block size for this algorithm");
+                Validators.AddError(responseData, $"IV: {param.IV} is not a valid block size for this algorithm");
                 return responseData;
             }
 
@@ -62,7 +62,7 @@ namespace SafeCrypt.AESEncryption
             return new EncryptionData
             {
                 EncryptedData = response.ByteArrayToHexString(),
-                Iv = param.IV,
+                IV = param.IV,
                 SecretKey = param.SecretKey
             };
         }
@@ -115,7 +115,7 @@ namespace SafeCrypt.AESEncryption
             return new EncryptionData
             {
                 EncryptedData = Convert.ToBase64String(response),
-                Iv = Convert.ToBase64String(aesIv),
+                IV = Convert.ToBase64String(aesIv),
                 SecretKey = base64secretKey
             };
         }
@@ -128,11 +128,6 @@ namespace SafeCrypt.AESEncryption
             if (secretKey == null )
                 throw new ArgumentNullException(nameof(secretKey));
         }
-
-        private void AddError(EncryptionData responseData, string error)
-        {
-            responseData.HasError = true;
-            responseData.Errors.Add(error);
-        }        
+     
     }
 }

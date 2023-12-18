@@ -65,7 +65,8 @@ namespace SafeCrypt.Helpers
         {
             if (string.IsNullOrEmpty(input))
             {
-                return null;
+                //Returning an empty array is better than returning null.
+                return new byte[0];
             }
             return Encoding.UTF8.GetBytes(input);
         }
