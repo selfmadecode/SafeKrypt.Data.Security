@@ -1,7 +1,63 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>$(AssemblyName).Data.Security</PackageId>
+    <Title>SafeCrypt - Simple Encryption Library for C#</Title>
+    <Authors>selfmade</Authors>
+    <Company>NextGen</Company>
+    <Description>This C# library provides methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm, and more. It offers a simple interface for users to encrypt and decrypt data with ease.</Description>
+    <Copyright>Raphael Anyanwu</Copyright>
+    <PackageProjectUrl>https://github.com/selfmadecode/SafeCrypt</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/selfmadecode/SafeCrypt</RepositoryUrl>
+    <PackageTags>encryption;aes;cryptography;base64;aes</PackageTags>
+    <PackageIcon>safecrypticon.jpg</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>MitLicense.txt</PackageLicenseFile>
+    <PackageReleaseNotes>SafeCrypt Library - Release Notes - Version 1.0.1
+
+This release (version 1.0.1) includes updates to the documentation and namespace changes. We have improved the README document to provide more comprehensive information about the library and made adjustments to the namespaces for better organization.
+
+Changes
+
+- Updated README document with detailed usage instructions, API references, and contribution guidelines.
+- Made changes to namespaces for better organization and clarity in the codebase.
+
+Bug Fixes
+
+No bug fixes in this release.
+
+Upgrade Command:
+dotnet add package SafeCrypt --version 1.0.1
+
+Feedback and Contributions:
+We appreciate your feedback and contributions! If you encounter any issues or have suggestions, please create an issue on GitHub: https://github.com/selfmadecode/SafeCrypt/issues
+
+Thank you for using the SafeCrypt Library!</PackageReleaseNotes>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Downloads\MitLicense.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\Downloads\safecrypticon.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
