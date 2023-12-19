@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SafeCrypt.AesEncryption;
 using SafeCrypt.Helpers;
 using SafeCrypt.Models;
@@ -66,8 +67,53 @@ namespace SafeCrypt.AESEncryption
                 SecretKey = param.SecretKey
             };
         }
-              
-        
+
+        public async Task<EncryptionData> EncryptToHexStringAsync(EncryptionParameters param)
+        {
+            var responseData = new EncryptionData();
+
+            Validators.ValidateNotNull(param);
+
+            // validate is base64
+            if (!Validators.IsBase64String(param.SecretKey))
+            {
+                AddError(responseData, $"SecretKey: {param.SecretKey} is not a base64 string");
+                return responseData;
+            }
+
+            if (!Validators.IsBase64String(param.IV))
+            {
+                AddError(responseData, $"IV: {param.IV} is not a base64 string");
+                return responseData;
+            }
+            // Convert input string to bytes
+            byte[] dataBytes = param.IV.ConvertKeysToBytes();
+
+            // Validate block size based on AES algorithm's requirements
+            if (!Validators.IsValidBlockSize(dataBytes.Length))
+            {
+                AddError(responseData, $"IV: {param.IV} is not a valid block size for this algorithm");
+                return responseData;
+            }
+
+            // Delegate the encryption to the underlying AES encryption method
+            var byteEncryptionParameters = new ByteEncryptionParameters
+            {
+                SecretKey = Convert.FromBase64String(param.SecretKey),
+                IV = dataBytes,
+                Data = param.DataToEncrypt.ConvertToHexString().HexadecimalStringToByteArray()
+            };
+
+            var response = await EncryptAESAsync(byteEncryptionParameters);
+
+            return new EncryptionData
+            {
+                EncryptedData = response.ByteArrayToHexString(),
+                Iv = param.IV,
+                SecretKey = param.SecretKey
+            };
+        }
+
         /// <summary>
         /// Encrypts the provided string data using the Advanced Encryption Standard (AES) algorithm.
         /// </summary>
@@ -119,6 +165,37 @@ namespace SafeCrypt.AESEncryption
                 SecretKey = base64secretKey
             };
         }
+
+        public async Task<EncryptionData> EncryptToBase64StringAsync(string dataToBeEncrypted, string base64secretKey)
+        {
+            // validate is base64
+            if (!Validators.IsBase64String(base64secretKey))
+            {
+                return null;
+            }
+
+            NullChecks(data: dataToBeEncrypted, base64secretKey);
+
+            // Generate a random 16-byte IV for AES in CBC mode
+            var aesIv = KeyGenerators.GenerateRandomIVKeyAsBytes(16);
+
+            var byteEncryptionParameters = new ByteEncryptionParameters
+            {
+                SecretKey = Convert.FromBase64String(base64secretKey),
+                IV = aesIv,
+                Data = dataToBeEncrypted.ConvertToHexString().HexadecimalStringToByteArray()
+            };
+
+            var response = await EncryptAESAsync(byteEncryptionParameters);
+
+            return new EncryptionData
+            {
+                EncryptedData = Convert.ToBase64String(response),
+                Iv = Convert.ToBase64String(aesIv),
+                SecretKey = base64secretKey
+            };
+        }
+
 
         private void NullChecks(string data, string secretKey)
         {

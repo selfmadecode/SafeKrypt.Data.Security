@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SafeCrypt.AesEncryption
 {
@@ -108,6 +109,65 @@ namespace SafeCrypt.AesEncryption
             {
 
                 throw;
+            }
+        }
+
+        /*
+        * method involves I/O operations, you should make it asynchronous by using the asynchronous methods provided by the cryptographic APIs
+        * */
+        internal static async Task<byte[]> DecryptAESAsync(ByteDecryptionParameters param)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                // Set the key and initialization vector
+                aes.Key = param.SecretKey;
+                aes.IV = param.IV;
+
+                // Create a decryptor using the key and initialization vector
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                // Use a MemoryStream to read the encrypted data
+                using (MemoryStream memoryStream = new MemoryStream(param.Data))
+                {
+                    // Use a CryptoStream to perform the decryption
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (MemoryStream decryptedStream = new MemoryStream())
+                        {
+                            // Copy the decrypted data from the CryptoStream to the MemoryStream
+                            await cryptoStream.CopyToAsync(decryptedStream);
+                            return decryptedStream.ToArray();
+                        }
+                    }
+                }
+            }
+        }
+
+        internal static async Task<byte[]> EncryptAESAsync(ByteEncryptionParameters param)
+        {
+            // Create an instance of the AES algorithm
+            using (Aes aes = Aes.Create())
+            {
+                // Set the key and initialization vector
+                aes.Key = param.SecretKey;
+                aes.IV = param.IV;
+                // Create an encryptor using the key and initialization vector
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                // Use a MemoryStream to store the encrypted data
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    // Use a CryptoStream to perform the encryption
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                    {
+                        // Write the data to be encrypted to the CryptoStream
+                        await cryptoStream.WriteAsync(param.Data, 0, param.Data.Length);
+                        cryptoStream.FlushFinalBlock();
+
+                        // Return the encrypted data as a byte array
+                        return memoryStream.ToArray();
+                    }
+                }
             }
         }
     }
