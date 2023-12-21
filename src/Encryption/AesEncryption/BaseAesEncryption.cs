@@ -1,9 +1,7 @@
 ﻿using SafeCrypt.Models;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace SafeCrypt.AesEncryption
 {
@@ -106,7 +104,6 @@ namespace SafeCrypt.AesEncryption
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

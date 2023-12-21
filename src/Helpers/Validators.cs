@@ -1,7 +1,5 @@
 ﻿using SafeCrypt.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SafeCrypt.Helpers
 {
@@ -37,6 +35,7 @@ namespace SafeCrypt.Helpers
                 throw new ArgumentNullException(nameof(parameters.IV), "IV property cannot be null.");
             }
         }
+
         public static void ValidateNotNull(DecryptionParameters parameters)
         {
             if (parameters == null)
