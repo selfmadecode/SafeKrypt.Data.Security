@@ -30,6 +30,18 @@ namespace SafeCrypt.Helpers
             return randomBytes;
         }
 
+        /// <summary>
+        /// Generates a random initialization vector (IV) key as a hexadecimal string.
+        /// </summary>
+        /// <returns>
+        /// A hexadecimal string representation of the randomly generated IV key.
+        /// </returns>
+        /// <remarks>
+        /// This method internally uses the <see cref="GenerateRandomIVKeyAsBytes"/> method
+        /// to obtain a random byte array and then converts it to a hexadecimal string using
+        /// <see cref="BitConverter.ToString"/>. Any hyphens in the resulting string are removed
+        /// using <see cref="string.Replace"/>.
+        /// </remarks>
         public static string GenerateRandomIVKeyAsString()
         {
             byte[] randomBytes = GenerateRandomIVKeyAsBytes(16);            
