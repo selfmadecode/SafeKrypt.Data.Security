@@ -30,6 +30,12 @@ namespace SafeCrypt.Helpers
             return randomBytes;
         }
 
+        public static string GenerateRandomIVKeyAsString()
+        {
+            byte[] randomBytes = GenerateRandomIVKeyAsBytes(16);            
+            return BitConverter.ToString(randomBytes).Replace("-", "");
+        }
+
         /// <summary>
         /// Generates a valid AES secret key with the specified key size.
         /// </summary>
