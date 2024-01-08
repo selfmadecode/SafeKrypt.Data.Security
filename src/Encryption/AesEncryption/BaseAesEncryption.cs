@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SafeCrypt.AesEncryption
 {
@@ -25,7 +26,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="Exception">
         /// Thrown for general encryption-related exceptions.
         /// </exception>
-        internal static byte[] EncryptAES(ByteEncryptionParameters param)
+        internal static async Task<byte[]> EncryptAES(ByteEncryptionParameters param)
         {
             try
             {
@@ -45,7 +46,7 @@ namespace SafeCrypt.AesEncryption
                         using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
                         {
                             // Write the data to be encrypted to the CryptoStream
-                            cryptoStream.Write(param.Data, 0, param.Data.Length);
+                            await cryptoStream.WriteAsync(param.Data, 0, param.Data.Length);
                             cryptoStream.FlushFinalBlock();
 
                             // Return the encrypted data as a byte array
@@ -73,7 +74,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="ArgumentNullException">
         /// Thrown if the input encrypted data, key, or initialization vector is null.
         /// </exception>
-        internal static byte[] DecryptAES(ByteDecryptionParameters param)
+        internal static async Task<byte[]> DecryptAES(ByteDecryptionParameters param)
         {
             try
             {
@@ -97,7 +98,7 @@ namespace SafeCrypt.AesEncryption
                             using (MemoryStream decryptedStream = new MemoryStream())
                             {
                                 // Copy the decrypted data from the CryptoStream to the MemoryStream
-                                cryptoStream.CopyTo(decryptedStream);
+                                await cryptoStream.CopyToAsync(decryptedStream);
                                 return decryptedStream.ToArray();
                             }
                         }
