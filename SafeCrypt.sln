@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0B7C0C60-9850-4554-AF85-86C0378B6B16}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\MitLicense.txt = ..\..\..\Downloads\MitLicense.txt
+		src\SafeCrypt.Lib\README.md = src\SafeCrypt.Lib\README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SafeCrypt.Lib", "SafeCrypt.Lib", "{8507D130-9F07-426C-8EE6-0AC714CF72E5}"
 EndProject
