@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace SafeCrypt.Models
 {
@@ -25,6 +23,7 @@ namespace SafeCrypt.Models
         public string SecretKey { get; set; }
 
         public bool HasError { get; set; }
+
         public List<string> Errors { get; set; } = new List<string>();
     }
 }

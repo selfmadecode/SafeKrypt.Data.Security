@@ -106,7 +106,6 @@ namespace SafeCrypt.AesEncryption
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
