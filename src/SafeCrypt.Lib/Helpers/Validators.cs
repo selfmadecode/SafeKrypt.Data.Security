@@ -1,11 +1,9 @@
 ﻿using SafeCrypt.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SafeCrypt.Helpers
 {
-    public static class Validators
+    internal static class Validators
     {
         /// <summary>
         /// Validates that the specified ByteEncryptionParameters instance is not null
@@ -15,7 +13,7 @@ namespace SafeCrypt.Helpers
         /// <exception cref="ArgumentNullException">
         /// Thrown if the specified parameters instance is null or if any of its required properties are null.
         /// </exception>
-        public static void ValidateNotNull(EncryptionParameters parameters)
+        internal static void ValidateNotNull(EncryptionParameters parameters)
         {
             if (parameters == null)
             {
@@ -37,7 +35,7 @@ namespace SafeCrypt.Helpers
                 throw new ArgumentNullException(nameof(parameters.IV), "IV property cannot be null.");
             }
         }
-        public static void ValidateNotNull(DecryptionParameters parameters)
+        internal static void ValidateNotNull(DecryptionParameters parameters)
         {
             if (parameters == null)
             {
@@ -60,7 +58,7 @@ namespace SafeCrypt.Helpers
             }
         }
 
-        public static void ValidateNotNull(StringEncryptionParameters parameters)
+        internal static void ValidateNotNull(StringEncryptionParameters parameters)
         {
             if (parameters == null)
             {
@@ -88,7 +86,7 @@ namespace SafeCrypt.Helpers
         /// </summary>
         /// <param name="keyAsString">The string to validate.</param>
         /// <returns>True if the string is a valid Base64-encoded key; otherwise, false.</returns>
-        public static bool IsBase64String(string keyAsString)
+        internal static bool IsBase64String(string keyAsString)
         {
             if (string.IsNullOrEmpty(keyAsString))
             {
@@ -111,7 +109,7 @@ namespace SafeCrypt.Helpers
         /// </summary>
         /// <param name="dataLength">The length of the data to be encrypted.</param>
         /// <returns>True if the block size is valid; otherwise, false.</returns>
-        public static bool IsValidBlockSize(int dataLength)
+        internal static bool IsValidBlockSize(int dataLength)
         {
             // AES block size is 128 bits (16 bytes)
             return dataLength % 16 == 0;

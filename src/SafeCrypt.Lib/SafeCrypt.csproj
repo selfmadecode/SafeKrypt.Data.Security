@@ -39,11 +39,15 @@ Thank you for using the SafeCrypt Library!</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\Downloads\MitLicense.txt">
+    <None Include="..\..\..\..\..\Downloads\MitLicense.txt">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\..\Downloads\safecrypticon.jpg">
+    <None Include="..\..\..\..\..\Downloads\safecrypticon.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

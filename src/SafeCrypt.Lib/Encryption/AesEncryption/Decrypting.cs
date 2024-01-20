@@ -2,12 +2,13 @@
 using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 using System;
+using System.Security.Cryptography;
 
 namespace SafeCrypt.AESDecryption
 {
     public class AesDecryption : BaseAesEncryption
     {
-        public DecryptionData DeEncryptFromHexString(DecryptionParameters param)
+        public DecryptionData DeEncryptFromHexString(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new DecryptionData();
 
@@ -43,7 +44,7 @@ namespace SafeCrypt.AESDecryption
                 Data = param.DataToDecrypt.HexadecimalStringToByteArray()
             };
 
-            var response = DecryptAES(byteEncryptionParameters);
+            var response = DecryptAES(byteEncryptionParameters, mode);
 
             return new DecryptionData
             {
@@ -53,7 +54,7 @@ namespace SafeCrypt.AESDecryption
             };
         }
 
-        public DecryptionData DecryptFromBase64String(DecryptionParameters param)
+        public DecryptionData DecryptFromBase64String(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new DecryptionData();
 
@@ -81,7 +82,7 @@ namespace SafeCrypt.AESDecryption
                     Data = Convert.FromBase64String(param.DataToDecrypt)
                 };
 
-                var response = DecryptAES(byteDecryptionParameters);
+                var response = DecryptAES(byteDecryptionParameters, mode);
 
                 return new DecryptionData
                 {
