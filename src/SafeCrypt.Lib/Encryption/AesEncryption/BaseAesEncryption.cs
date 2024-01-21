@@ -1,10 +1,7 @@
 ﻿using SafeCrypt.Models;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SafeCrypt.AesEncryption
 {
@@ -26,7 +23,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="Exception">
         /// Thrown for general encryption-related exceptions.
         /// </exception>
-        internal static async Task<byte[]> EncryptAES(ByteEncryptionParameters param)
+        internal static byte[] EncryptAES(ByteEncryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             try
             {
@@ -36,6 +33,7 @@ namespace SafeCrypt.AesEncryption
                     // Set the key and initialization vector
                     aes.Key = param.SecretKey;
                     aes.IV = param.IV;
+                    aes.Mode = mode;
                     // Create an encryptor using the key and initialization vector
                     ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
@@ -74,7 +72,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="ArgumentNullException">
         /// Thrown if the input encrypted data, key, or initialization vector is null.
         /// </exception>
-        internal static async Task<byte[]> DecryptAES(ByteDecryptionParameters param)
+        internal static byte[] DecryptAES(ByteDecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             try
             {
@@ -84,6 +82,7 @@ namespace SafeCrypt.AesEncryption
                     // Set the key and initialization vector
                     aes.Key = param.SecretKey;
                     aes.IV = param.IV;
+                    aes.Mode= mode;
 
                     // Create a decryptor using the key and initialization vector
                     ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
@@ -107,7 +106,6 @@ namespace SafeCrypt.AesEncryption
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

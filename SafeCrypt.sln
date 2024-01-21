@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeCrypt", "SafeCrypt.csproj", "{204CA507-752E-43A6-A094-794E40ABAE1F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0B7C0C60-9850-4554-AF85-86C0378B6B16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "safecrypt-testapp", "..\safecrypt-testapp\safecrypt-testapp.csproj", "{76D17C56-5643-4148-A504-8D6E24D24CAD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SafeCrypt.Lib", "SafeCrypt.Lib", "{8507D130-9F07-426C-8EE6-0AC714CF72E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SafeCrypt.App", "SafeCrypt.App", "{1D91E775-F63F-4537-B81E-B8F9A6480D6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeCrypt", "src\SafeCrypt.Lib\SafeCrypt.csproj", "{AE9FAE54-9854-4F98-A60F-19125CEAA3A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeCrypt.App", "src\SafeCrypt.Test\SafeCrypt.App.csproj", "{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,17 +19,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{204CA507-752E-43A6-A094-794E40ABAE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{204CA507-752E-43A6-A094-794E40ABAE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{204CA507-752E-43A6-A094-794E40ABAE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{204CA507-752E-43A6-A094-794E40ABAE1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76D17C56-5643-4148-A504-8D6E24D24CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9FAE54-9854-4F98-A60F-19125CEAA3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9FAE54-9854-4F98-A60F-19125CEAA3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9FAE54-9854-4F98-A60F-19125CEAA3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9FAE54-9854-4F98-A60F-19125CEAA3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8507D130-9F07-426C-8EE6-0AC714CF72E5} = {0B7C0C60-9850-4554-AF85-86C0378B6B16}
+		{1D91E775-F63F-4537-B81E-B8F9A6480D6D} = {0B7C0C60-9850-4554-AF85-86C0378B6B16}
+		{AE9FAE54-9854-4F98-A60F-19125CEAA3A8} = {8507D130-9F07-426C-8EE6-0AC714CF72E5}
+		{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6} = {1D91E775-F63F-4537-B81E-B8F9A6480D6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {639A4359-2BA4-4F71-9EBF-D6EAB68C84CB}
