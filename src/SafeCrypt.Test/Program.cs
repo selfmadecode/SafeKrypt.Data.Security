@@ -11,13 +11,13 @@ var secret = "hghjuytsdfraestwsgtere==";
 var encryptor = new AesEncryption();
 // this method generates a random IV key for the encryption process
 // the IV is returned in the response with other properties 
-var response = encryptor.EncryptToBase64String(dataToEncrypt, secret);
+var response = await encryptor.EncryptToBase64StringAsync(dataToEncrypt, secret);
 
-//Console.WriteLine("............Encryption Started............");
+Console.WriteLine("............Encryption Started............");
 
-//Console.WriteLine($"Encrypted data: {response.EncryptedData}");
-//Console.WriteLine($"IV key: {response.Iv}");
-//Console.WriteLine($"Secret key: {response.SecretKey}");
+Console.WriteLine($"Encrypted data: {response.EncryptedData}");
+Console.WriteLine($"IV key: {response.Iv}");
+Console.WriteLine($"Secret key: {response.SecretKey}");
 
 
 // Decryption process
@@ -29,7 +29,7 @@ var decryptorParam = new DecryptionParameters
 };
 
 var decryptor = new AesDecryption();
-var decryptionData = decryptor.DecryptFromBase64String(decryptorParam);
+var decryptionData = await decryptor.DecryptFromBase64StringAsync(decryptorParam);
 
 Console.WriteLine("............Decryption Started............");
 Console.WriteLine($"Decrypted data: { decryptionData.DecryptedData }");
