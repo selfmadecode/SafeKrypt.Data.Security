@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace SafeCrypt.AesEncryption
 {
@@ -23,7 +24,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="Exception">
         /// Thrown for general encryption-related exceptions.
         /// </exception>
-        internal static byte[] EncryptAES(ByteEncryptionParameters param, CipherMode mode = CipherMode.CBC)
+        internal static async Task<byte[]> EncryptAsync(ByteEncryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             try
             {
@@ -72,7 +73,7 @@ namespace SafeCrypt.AesEncryption
         /// <exception cref="ArgumentNullException">
         /// Thrown if the input encrypted data, key, or initialization vector is null.
         /// </exception>
-        internal static byte[] DecryptAES(ByteDecryptionParameters param, CipherMode mode = CipherMode.CBC)
+        internal static async Task<byte[]> DecryptAsync(ByteDecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             try
             {
