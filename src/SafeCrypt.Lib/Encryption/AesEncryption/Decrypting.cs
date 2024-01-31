@@ -3,12 +3,23 @@ using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 using System;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace SafeCrypt.AESDecryption
 {
     public class AesDecryption : BaseAesEncryption
     {
-        public DecryptionData DeEncryptFromHexString(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
+        /// <summary>
+        /// Asynchronously decrypts data from a hexadecimal string using the specified decryption parameters and cipher mode.
+        /// </summary>
+        /// <param name="param">Decryption parameters containing secret key, IV, and data to decrypt.</param>
+        /// <param name="mode">Cipher mode used for decryption (default is CipherMode.CBC).</param>
+        /// <returns>
+        /// A <see cref="Task{TResult}"/> representing the asynchronous operation.
+        /// The task result is a <see cref="DecryptionData"/> object containing the decrypted data, IV, and secret key.
+        /// If decryption fails, the <see cref="DecryptionData"/> object will contain error information.
+        /// </returns>
+        public async Task<DecryptionData> DecryptFromHexStringAsync(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new DecryptionData();
 
@@ -44,7 +55,7 @@ namespace SafeCrypt.AESDecryption
                 Data = param.DataToDecrypt.HexadecimalStringToByteArray()
             };
 
-            var response = DecryptAES(byteEncryptionParameters, mode);
+            var response = await DecryptAsync(byteEncryptionParameters, mode);
 
             return new DecryptionData
             {
@@ -54,7 +65,17 @@ namespace SafeCrypt.AESDecryption
             };
         }
 
-        public DecryptionData DecryptFromBase64String(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
+        /// <summary>
+        /// Asynchronously decrypts data from a Base64-encoded string using the specified decryption parameters and cipher mode.
+        /// </summary>
+        /// <param name="param">Decryption parameters containing secret key, IV, and data to decrypt.</param>
+        /// <param name="mode">Cipher mode used for decryption (default is CipherMode.CBC).</param>
+        /// <returns>
+        /// A <see cref="Task{TResult}"/> representing the asynchronous operation.
+        /// The task result is a <see cref="DecryptionData"/> object containing the decrypted data, IV, and secret key.
+        /// If decryption fails, the <see cref="DecryptionData"/> object will contain error information.
+        /// </returns>
+        public async Task<DecryptionData> DecryptFromBase64StringAsync(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new DecryptionData();
 
@@ -82,7 +103,7 @@ namespace SafeCrypt.AESDecryption
                     Data = Convert.FromBase64String(param.DataToDecrypt)
                 };
 
-                var response = DecryptAES(byteDecryptionParameters, mode);
+                var response = await DecryptAsync(byteDecryptionParameters, mode);
 
                 return new DecryptionData
                 {

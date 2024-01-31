@@ -45,11 +45,11 @@ using SafeCrypt.Models;
 
 class Program
 {
-    static void Main() 
+    static async Task Main()
     {
         var aesEncryptor = new AesEncryption();
         
-        var encryptedData = aesEncryptor.EncryptToBase64String("Hello, World!", "gdjdtsraewsuteastwerse=="
+        var encryptedData = await aesEncryptor.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
         
         Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
         Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
@@ -64,7 +64,7 @@ class Program
 
         };
 
-        var data = aesDecryptor.DecryptFromBase64String(parameterToDecrypt)
+        var data = await aesDecryptor.DecryptFromBase64StringAsync(parameterToDecrypt)
 
         Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
         Console.WriteLine($"Initialization Vector: {data.Iv}");
@@ -80,7 +80,7 @@ using SafeCrypt.Models;
 
 class Program
 {
-    static void Main() 
+    static async Task Main() 
     {
         var dataToEncrypt = "Data to Encrypt";
 
@@ -96,7 +96,7 @@ class Program
 
         var encryptor = new AesEncryption();
 
-        var response = encryptor.EncryptToBase64String(encryptionParam.DataToEncrypt, secret);
+        var response = await encryptor.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
 
         Console.WriteLine(response.EncryptedData);
         Console.WriteLine(response.Iv);
@@ -113,7 +113,7 @@ class Program
 
 
         var decryptor = new AesDecryption();
-        var decryptionData = decryptor.DecryptFromBase64String(decryptorParam);
+        var decryptionData = await decryptor.DecryptFromBase64StringAsync(decryptorParam);
 
         Console.WriteLine(decryptionData.DecryptedData);
         Console.WriteLine(decryptionData.Iv);
