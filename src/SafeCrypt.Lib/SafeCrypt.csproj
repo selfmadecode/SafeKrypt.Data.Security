@@ -15,27 +15,26 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>MitLicense.txt</PackageLicenseFile>
-    <PackageReleaseNotes>SafeCrypt Library - Release Notes - Version 1.0.1
+    <PackageReleaseNotes>SafeCrypt Library - Release Notes - Version 1.0.2
 
-This release (version 1.0.1) includes updates to the documentation and namespace changes. We have improved the README document to provide more comprehensive information about the library and made adjustments to the namespaces for better organization.
+We are excited to announce the latest version of SafeCrypt (v1.0.2), featuring a significant enhancement to our encryption methods. In this release, all encryption operations are now asynchronous, providing improved performance and responsiveness.
 
-Changes
-
-- Updated README document with detailed usage instructions, API references, and contribution guidelines.
-- Made changes to namespaces for better organization and clarity in the codebase.
+What's New:
+Async Encryption and Decryption:
+We have made all encryption methods asynchronous to better align with modern programming practices and enhance the overall responsiveness of SafeCrypt.
 
 Bug Fixes
 
 No bug fixes in this release.
 
 Upgrade Command:
-dotnet add package SafeCrypt --version 1.0.1
+dotnet add package SafeCrypt --version 1.0.2
 
 Feedback and Contributions:
 We appreciate your feedback and contributions! If you encounter any issues or have suggestions, please create an issue on GitHub: https://github.com/selfmadecode/SafeCrypt/issues
 
 Thank you for using the SafeCrypt Library!</PackageReleaseNotes>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
