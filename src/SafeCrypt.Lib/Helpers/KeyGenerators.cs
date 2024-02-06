@@ -67,5 +67,33 @@ namespace SafeCrypt.Helpers
                 return Convert.ToBase64String(aesAlg.Key);
             }
         }
+
+        /// <summary>
+        /// Generates a pair of RSA public and private keys with the specified key size.
+        /// </summary>
+        /// <param name="keySize">The size of the key pair (e.g., 1024, 2048 bits).</param>
+        /// <returns>
+        /// A <see cref="Tuple{T1, T2}"/> containing the generated RSA public and private keys.
+        /// Item1 represents the public key, and Item2 represents the private key.
+        /// </returns>
+        /// <remarks>
+        /// The generated keys are in XML format. The public key does not include the private key,
+        /// while the private key includes both public and private components.
+        /// </remarks>
+        /// <param name="keySize">The size of the key pair (e.g., 1024, 2048 bits).</param>
+        /// <returns>A tuple containing the generated RSA public and private keys.</returns>
+        /// <exception cref="CryptographicException">
+        /// Thrown if an error occurs during key generation.
+        /// </exception>
+        public static Tuple<string, string> GenerateRsaKeys(int keySize)
+        {
+            using (var rsa = new RSACryptoServiceProvider(keySize))
+            {
+                string publicKey = rsa.ToXmlString(false); // Don't include private key
+                string privateKey = rsa.ToXmlString(true); // Include private key
+
+                return new Tuple<string, string>(publicKey, privateKey);
+            }
+        }
     }
 }

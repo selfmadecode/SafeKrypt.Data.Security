@@ -7,23 +7,7 @@ using SafeCrypt.RsaEncryption.Models;
 namespace SafeCrypt.RsaEncryption
 {
     public class RsaEncryption
-    {
-        /// <summary>
-        /// Generates RSA key pair.
-        /// </summary>
-        /// <param name="keySize">The size of the key pair (e.g., 1024, 2048 bits).</param>
-        /// <returns>The generated RSA key pair.</returns>
-        public static Tuple<string, string> GenerateRsaKeys(int keySize)
-        {
-            using (var rsa = new RSACryptoServiceProvider(keySize))
-            {
-                string publicKey = rsa.ToXmlString(false); // Don't include private key
-                string privateKey = rsa.ToXmlString(true); // Include private key
-
-                return new Tuple<string, string>(publicKey, privateKey);
-            }
-        }
-
+    {    
         /// <summary>
         /// Encrypts data using RSA public key.
         /// </summary>
