@@ -2,6 +2,7 @@
 using System.Text;
 using System;
 using System.Threading.Tasks;
+using SafeCrypt.RsaEncryption.Models;
 
 namespace SafeCrypt.RsaEncryption
 {
@@ -29,18 +30,30 @@ namespace SafeCrypt.RsaEncryption
         /// <param name="data">The data to be encrypted.</param>
         /// <param name="publicKey">The RSA public key.</param>
         /// <returns>The encrypted data.</returns>
-        public static async Task<byte[]> EncryptAsync(string data, string publicKey)
+        public static async Task<RsaEncryptionResult> EncryptAsync(string data, string publicKey)
         {
+            var result = new RsaEncryptionResult();
 
-            return await Task.Run(() => {
-                using (var rsa = new RSACryptoServiceProvider())
+            try
+            {
+                var encryptedData = await Task.Run(() =>
                 {
-                    rsa.FromXmlString(publicKey);
-                    byte[] dataBytes = Encoding.UTF8.GetBytes(data);
-                    byte[] encryptedData = rsa.Encrypt(dataBytes, false);
-                    return encryptedData;
-                }
-            });
+                    using (var rsa = new RSACryptoServiceProvider())
+                    {
+                        rsa.FromXmlString(publicKey);
+                        byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+                        return rsa.Encrypt(dataBytes, false);
+                    }
+                });
+
+                result.EncryptedData = encryptedData;
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(ex.Message);
+            }
+
+            return result;
         }
 
         /// <summary>
