@@ -16,10 +16,10 @@ namespace SafeCrypt.RsaEncryption.Models
         /// </summary>
         public List<string> Errors { get; set; }
 
-        /// <summary>
-        /// Gets or sets the public key used for encryption.
-        /// </summary>
-        public string PublicKey { get; set; }
+        ///// <summary>
+        ///// Gets or sets the public key used for encryption.
+        ///// </summary>
+        //public string PublicKey { get; set; }
 
         /// <summary>
         /// Gets or sets the private key used for encryption.
