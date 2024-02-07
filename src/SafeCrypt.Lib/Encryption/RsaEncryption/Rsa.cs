@@ -41,8 +41,11 @@ namespace SafeCrypt.RsaEncryption
             }
 
             // Convert the encrypted data to a hexadecimal string
+            //result.EncryptedData = data.EncryptedData;
+            //result.EncryptedData = Convert.ToBase64String(data.EncryptedData);
             //result.EncryptedData = BitConverter.ToString(data.EncryptedData);
-            result.EncryptedData = Encoding.UTF8.GetString(data.EncryptedData); //Encoding.UTF8.GetString(decryptedData)
+            //result.EncryptedData = Encoding.UTF8.GetString(data.EncryptedData); //Encoding.UTF8.GetString(decryptedData)
+            result.EncryptedData = data.EncryptedData; //Encoding.UTF8.GetString(decryptedData)
             return result;
         }
 
@@ -50,11 +53,11 @@ namespace SafeCrypt.RsaEncryption
         {
             var result = new DecryptionResult();
 
-            if (string.IsNullOrWhiteSpace(model.DataToDecrypt))
-            {
-                result.Errors.Add($"Data cannot be null {nameof(model.DataToDecrypt)}");
-                return result;
-            }
+            //if (string.IsNullOrWhiteSpace(model.DataToDecrypt))
+            //{
+            //    result.Errors.Add($"Data cannot be null {nameof(model.DataToDecrypt)}");
+            //    return result;
+            //}
 
             if (string.IsNullOrWhiteSpace(model.PrivateKey))
             {
@@ -71,8 +74,7 @@ namespace SafeCrypt.RsaEncryption
                 result.Errors.AddRange(data.Errors);
                 return result;
             }
-
-            // convert the encrypted data to a hexadecimal string
+                        
             result.DecryptedData = Encoding.UTF8.GetString(data.DecryptedData);
             return result;
         }
