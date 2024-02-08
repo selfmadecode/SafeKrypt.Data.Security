@@ -6,15 +6,28 @@ using SafeCrypt.RsaEncryption.Models;
 
 namespace SafeCrypt.RsaEncryption
 {
-    public class RsaEncryption
-    {    
+    public static class RsaEncryption
+    {
         /// <summary>
-        /// Encrypts data using RSA public key.
+        /// Asynchronously encrypts the provided data using the RSA (Rivest–Shamir–Adleman) algorithm.
         /// </summary>
         /// <param name="data">The data to be encrypted.</param>
-        /// <param name="publicKey">The RSA public key.</param>
-        /// <returns>The encrypted data.</returns>
-        public static async Task<RsaEncryptionResult> EncryptAsync(string data, string publicKey)
+        /// <param name="publicKey">The public key used for encryption.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation that, upon completion,
+        /// returns an <see cref="RsaEncryptionResult"/> containing the encrypted data.
+        /// </returns>
+        /// <remarks>
+        /// This method uses the RSA algorithm to encrypt the input data with the provided public key.
+        /// The encryption is performed asynchronously using <see cref="Task.Run"/>.
+        /// </remarks>
+        /// <param name="data">The data to be encrypted.</param>
+        /// <param name="publicKey">The public key used for encryption.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation that, upon completion,
+        /// returns an <see cref="RsaEncryptionResult"/> containing the encrypted data.
+        /// </returns>
+        internal static async Task<RsaEncryptionResult> EncryptAsync(string data, string publicKey)
         {
             var result = new RsaEncryptionResult();
 
@@ -46,17 +59,31 @@ namespace SafeCrypt.RsaEncryption
         /// <param name="encryptedData">The encrypted data.</param>
         /// <param name="privateKey">The RSA private key.</param>
         /// <returns>The decrypted data.</returns>
-        public static async Task<string> DecryptAsync(byte[] encryptedData, string privateKey)
+        internal static async Task<RsaDecryptionResult> DecryptAsync(byte[] encryptedData, string privateKey)
         {
-            return await Task.Run(() =>
+            var result = new RsaDecryptionResult();
+
+            try
             {
-                using (var rsa = new RSACryptoServiceProvider())
+                var decryptedData = await Task.Run(() =>
                 {
-                    rsa.FromXmlString(privateKey);
-                    byte[] decryptedData = rsa.Decrypt(encryptedData, false);
-                    return Encoding.UTF8.GetString(decryptedData);
-                }
-            });
+                    using (var rsa = new RSACryptoServiceProvider())
+                    {
+                        rsa.FromXmlString(privateKey);
+                        byte[] dataBytes = encryptedData;
+                        return rsa.Decrypt(encryptedData, false);
+                    }
+                });
+
+                result.DecryptedData = decryptedData;
+
+            }
+            catch (Exception ex)
+            {
+                result.Errors.Add(ex.Message);
+            }
+
+            return result;
         }
     }
 }
