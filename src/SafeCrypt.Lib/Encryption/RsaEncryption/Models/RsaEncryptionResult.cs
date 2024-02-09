@@ -16,6 +16,27 @@ namespace SafeCrypt.RsaEncryption.Models
         /// </summary>
         public List<string> Errors { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RsaEncryptionResult"/> class.
+        /// </summary>
+        public RsaEncryptionResult()
+        {
+            Errors = new List<string>();
+        }
+    }
+
+    public class RsaDecryptionResult
+    {
+        /// <summary>
+        /// Gets or sets the encrypted data.
+        /// </summary>
+        public byte[] DecryptedData { get; set; }
+
+        /// <summary>
+        /// Gets or sets the list of errors encountered during encryption.
+        /// </summary>
+        public List<string> Errors { get; set; }
+
         ///// <summary>
         ///// Gets or sets the public key used for encryption.
         ///// </summary>
@@ -29,7 +50,43 @@ namespace SafeCrypt.RsaEncryption.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="RsaEncryptionResult"/> class.
         /// </summary>
-        public RsaEncryptionResult()
+        public RsaDecryptionResult()
+        {
+            Errors = new List<string>();
+        }
+    }
+
+    public class EncryptionResult
+    {
+        /// <summary>
+        /// Gets or sets the list of errors encountered during encryption.
+        /// </summary>
+        public List<string> Errors { get; set; }
+
+        /// <summary>
+        /// Gets or sets the encrypted data.
+        /// </summary>
+        public byte[] EncryptedData { get; set; }
+
+        public EncryptionResult()
+        {
+            Errors = new List<string>();
+        }
+    }
+
+    public class DecryptionResult
+    {
+        /// <summary>
+        /// Gets or sets the list of errors encountered during encryption.
+        /// </summary>
+        public List<string> Errors { get; set; }
+
+        /// <summary>
+        /// Gets or sets the encrypted data.
+        /// </summary>
+        public string DecryptedData { get; set; }
+
+        public DecryptionResult()
         {
             Errors = new List<string>();
         }
