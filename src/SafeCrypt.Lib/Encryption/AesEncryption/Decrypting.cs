@@ -38,7 +38,7 @@ namespace SafeCrypt.AESDecryption
                 return responseData;
             }
             // Convert input string to bytes
-            byte[] dataBytes = param.IV.ConvertKeysToBytes();
+            byte[] dataBytes = param.IV.HexadecimalStringToByteArray();
 
             // Validate block size based on AES algorithm's requirements
             if (!Validators.IsValidBlockSize(dataBytes.Length))
@@ -80,7 +80,7 @@ namespace SafeCrypt.AESDecryption
             var responseData = new DecryptionData();
 
             Validators.ValidateNotNull(param);
-            
+
 
             if (!Validators.IsBase64String(param.SecretKey))
             {

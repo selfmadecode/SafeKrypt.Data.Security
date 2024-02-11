@@ -32,7 +32,7 @@ var decryptor = new AesDecryption();
 var decryptionData = await decryptor.DecryptFromBase64StringAsync(decryptorParam);
 
 Console.WriteLine("............Decryption Started............");
-Console.WriteLine($"Decrypted data: { decryptionData.DecryptedData }");
+Console.WriteLine($"Decrypted data: {decryptionData.DecryptedData}");
 Console.WriteLine($"IV key: {decryptionData.Iv}");
 Console.WriteLine($"Secret key: {decryptionData.SecretKey}");
 
