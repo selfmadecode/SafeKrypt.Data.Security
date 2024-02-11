@@ -1,9 +1,9 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using SafeCrypt.AesEncryption;
+﻿using SafeCrypt.AesEncryption;
 using SafeCrypt.Helpers;
 using SafeCrypt.Models;
+using System;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace SafeCrypt.AESEncryption
 {
@@ -35,7 +35,7 @@ namespace SafeCrypt.AESEncryption
             }
 
             // Convert input string to bytes
-            byte[] dataBytes = param.IV.ConvertKeysToBytes();
+            byte[] dataBytes = param.IV.HexadecimalStringToByteArray();
 
             // Validate block size based on AES algorithm's requirements
             if (!Validators.IsValidBlockSize(dataBytes.Length))
@@ -139,7 +139,7 @@ namespace SafeCrypt.AESEncryption
             if (data == null || data.Length <= 0)
                 throw new ArgumentNullException(nameof(data));
 
-            if (secretKey == null )
+            if (secretKey == null)
                 throw new ArgumentNullException(nameof(secretKey));
         }
 
@@ -147,6 +147,6 @@ namespace SafeCrypt.AESEncryption
         {
             responseData.HasError = true;
             responseData.Errors.Add(error);
-        }        
+        }
     }
 }
