@@ -6,7 +6,7 @@ using SafeCrypt.RsaEncryption.Models;
 
 namespace SafeCrypt.RsaEncryption
 {
-    public static class RsaEncryption
+    internal static class RsaEncryption
     {
         /// <summary>
         /// Asynchronously encrypts the provided data using the RSA (Rivest–Shamir–Adleman) algorithm.
