@@ -2,7 +2,7 @@
 using SafeCrypt.RsaEncryption;
 using System.Collections;
 
-namespace safecrypt_testapp.Usage;
+namespace SafeCrypt.App.Usage;
 
 internal class RsaUsage
 {
