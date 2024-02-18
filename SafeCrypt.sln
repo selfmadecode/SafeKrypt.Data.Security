@@ -13,11 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeCrypt", "src\SafeCrypt.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeCrypt.App", "src\SafeCrypt.Test\SafeCrypt.App.csproj", "{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{632FAE12-6DE3-4B21-ADBB-F5222B35F707}"
-	ProjectSection(SolutionItems) = preProject
-		Rsa.md = Rsa.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,7 +36,6 @@ Global
 		{1D91E775-F63F-4537-B81E-B8F9A6480D6D} = {0B7C0C60-9850-4554-AF85-86C0378B6B16}
 		{AE9FAE54-9854-4F98-A60F-19125CEAA3A8} = {8507D130-9F07-426C-8EE6-0AC714CF72E5}
 		{DAD7FFA3-AABC-47FF-BA79-0C9531BFBBE6} = {1D91E775-F63F-4537-B81E-B8F9A6480D6D}
-		{632FAE12-6DE3-4B21-ADBB-F5222B35F707} = {0B7C0C60-9850-4554-AF85-86C0378B6B16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {639A4359-2BA4-4F71-9EBF-D6EAB68C84CB}
