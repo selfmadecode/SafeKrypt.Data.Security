@@ -12,6 +12,7 @@ The Encryption library provides a set of methods for encrypting and decrypting d
 - [Usage](#usage)
 - [API Reference](#api-reference)
 - [Examples](#examples)
+- [RSA Encryption and Decryption](#rsa)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -121,6 +122,9 @@ class Program
     }
 }
 ```
+## Rsa
+For more details on RSA Encryption, check the [Rsa.md](../doc/Rsa.md) document.
+
 
 ## Contributing
 
