@@ -128,7 +128,7 @@ class Program
 This library provides a straightforward implementation of RSA encryption and decryption in C# using the .NET `RSACryptoServiceProvider`.
 It includes methods for generating RSA key pairs, encrypting data with a public key, and decrypting data with a private key.
 
-For more details on RSA Encryption, check the [Rsa.md](../doc/Rsa.md) document.
+For more details on RSA Encryption, check the [Rsa.md](doc/Rsa.md) document.
 
 
 ## Contributing
