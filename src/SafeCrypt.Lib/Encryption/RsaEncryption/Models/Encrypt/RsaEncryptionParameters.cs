@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SafeCrypt.RsaEncryption.Models
+namespace SafeCrypt.RsaEncryption
 {
     public sealed class RsaEncryptionParameters : IEncryptionData
     {
