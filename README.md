@@ -10,7 +10,7 @@ It is designed to be easy to use and can be integrated into C# applications that
 ## Table of Contents
 
 - [Installation](#installation)
-- [AES usage](#usage)
+- [AES Encryption and Decryption usage](#usage)
 - [RSA Encryption and Decryption usage](#rsa)
 - [Contributing](#contributing)
 - [License](#license)
