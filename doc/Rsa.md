@@ -17,6 +17,7 @@ It includes methods for generating RSA key pairs, encrypting data with a public 
 
 ```csharp
 using SafeCrypt.Helpers;
+using SafeCrypt.RsaEncryption;
 
 var rsaKeyPair = KeyGenerators.GenerateRsaKeys(2048);
 
