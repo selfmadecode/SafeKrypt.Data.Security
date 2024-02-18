@@ -6,7 +6,7 @@ namespace safecrypt_testapp.Usage;
 
 internal class RsaUsage
 {
-    internal async void Usage()
+    internal protected async void Usage()
     {
         // Example: Generate RSA keys
         var rsaKeyPair = KeyGenerators.GenerateRsaKeys(2048);
