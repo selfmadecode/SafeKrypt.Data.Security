@@ -7,7 +7,7 @@ using SafeCrypt.Models;
 
 namespace SafeCrypt.AESEncryption
 {
-    public class AesEncryption : BaseAesEncryption
+    public static class AesEncryption
     {
         /// <summary>
         /// Asynchronously encrypts the provided data using the specified secret key and initialization vector (IV).
@@ -23,7 +23,7 @@ namespace SafeCrypt.AESEncryption
         /// <param name="secretKey">The secret key used for encryption.</param>
         /// <param name="iv">The initialization vector used for encryption.</param>
         /// <returns>The encrypted data as a byte array.</returns>
-        public async Task<EncryptionData> EncryptToHexStringAsync(EncryptionParameters param, CipherMode mode = CipherMode.CBC)
+        public static async Task<EncryptionData> EncryptToHexStringAsync(EncryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new EncryptionData();
 
@@ -52,7 +52,7 @@ namespace SafeCrypt.AESEncryption
                 Data = param.DataToEncrypt.ConvertToHexString().HexadecimalStringToByteArray()
             };
 
-            var response = await EncryptAsync(byteEncryptionParameters, mode);
+            var response = await BaseAesEncryption.EncryptAsync(byteEncryptionParameters, mode);
 
             return new EncryptionData
             {
@@ -84,7 +84,7 @@ namespace SafeCrypt.AESEncryption
         /// <exception cref="FormatException">
         /// Thrown if the base64secretKey is not a valid Base64-encoded string.
         /// </exception>
-        public async Task<EncryptionData> EncryptToBase64StringAsync(string dataToBeEncrypted, string base64secretKey, CipherMode mode = CipherMode.CBC)
+        public static async Task<EncryptionData> EncryptToBase64StringAsync(string dataToBeEncrypted, string base64secretKey, CipherMode mode = CipherMode.CBC)
         {
             // validate is base64
             if (!Validators.IsBase64String(base64secretKey))
@@ -104,7 +104,7 @@ namespace SafeCrypt.AESEncryption
                 Data = dataToBeEncrypted.ConvertToHexString().HexadecimalStringToByteArray()
             };
 
-            var response = await EncryptAsync(byteEncryptionParameters, mode);
+            var response = await BaseAesEncryption.EncryptAsync(byteEncryptionParameters, mode);
 
             return new EncryptionData
             {
@@ -114,7 +114,7 @@ namespace SafeCrypt.AESEncryption
             };
         }
 
-        private EncryptionData ValidateEncryptionParameters(EncryptionParameters param)
+        private static EncryptionData ValidateEncryptionParameters(EncryptionParameters param)
         {
             var responseData = new EncryptionData();
 
@@ -134,7 +134,7 @@ namespace SafeCrypt.AESEncryption
             return responseData;
         }
 
-        private void NullChecks(string data, string secretKey)
+        private static void NullChecks(string data, string secretKey)
         {
             if (data == null || data.Length <= 0)
                 throw new ArgumentNullException(nameof(data));
@@ -143,7 +143,7 @@ namespace SafeCrypt.AESEncryption
                 throw new ArgumentNullException(nameof(secretKey));
         }
 
-        private void AddError(EncryptionData responseData, string error)
+        private static void AddError(EncryptionData responseData, string error)
         {
             responseData.HasError = true;
             responseData.Errors.Add(error);
