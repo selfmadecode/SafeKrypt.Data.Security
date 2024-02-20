@@ -47,15 +47,12 @@ class Program
 {
     static async Task Main()
     {
-        var aesEncryptor = new AesEncryption();
         
-        var encryptedData = await aesEncryptor.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
+        var encryptedData = await AesEncryption.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
         
         Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
         Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
-
-        var aesDecryptor = new AesDecryption();
-
+                
         var parameterToDecrypt = new DecryptionParameters
         {
           DataToDecrypt = encryptedData.EncryptedData,
@@ -64,7 +61,7 @@ class Program
 
         };
 
-        var data = await aesDecryptor.DecryptFromBase64StringAsync(parameterToDecrypt)
+        var data = await AesDecryption.DecryptFromBase64StringAsync(parameterToDecrypt)
 
         Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
         Console.WriteLine($"Initialization Vector: {data.Iv}");
@@ -94,9 +91,8 @@ class Program
             SecretKey = secret
         };
 
-        var encryptor = new AesEncryption();
 
-        var response = await encryptor.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
+        var response = await AesEncryption.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
 
         Console.WriteLine(response.EncryptedData);
         Console.WriteLine(response.Iv);
@@ -112,8 +108,7 @@ class Program
         };
 
 
-        var decryptor = new AesDecryption();
-        var decryptionData = await decryptor.DecryptFromBase64StringAsync(decryptorParam);
+        var decryptionData = await AesDecryption.DecryptFromBase64StringAsync(decryptorParam);
 
         Console.WriteLine(decryptionData.DecryptedData);
         Console.WriteLine(decryptionData.Iv);
