@@ -4,14 +4,14 @@ A C# library for encryption and decryption.
 
 ## Overview
 
-The Encryption library provides a set of methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm, and other algorithm. It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.
-
+The SafeCrypt library provides a set of methods for encrypting and decrypting data using various encryption algorithms,
+including the Advanced Encryption Standard (AES) and RSA (Rivest–Shamir–Adleman).
+It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [API Reference](#api-reference)
-- [Examples](#examples)
+- [AES Encryption and Decryption usage](#usage)
+- [RSA Encryption and Decryption usage](#rsa)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -34,9 +34,10 @@ To use the SafeCrypt library in your C# project, follow these steps:
 
 Now, you can reference the SafeCrypt library in your C# project.
 
-## Basic Usage
+## Usage
 
-To use the library in your C# application, instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
+To use the AES encryption in your C# application,
+instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
 
 ```csharp
 using SafeCrypt.AESDecryption;
@@ -121,6 +122,14 @@ class Program
     }
 }
 ```
+
+
+## Rsa
+This library provides a straightforward implementation of RSA encryption and decryption in C# using the .NET `RSACryptoServiceProvider`.
+It includes methods for generating RSA key pairs, encrypting data with a public key, and decrypting data with a private key.
+
+For more details on RSA Encryption, check the [Rsa.md](doc/Rsa.md) document.
+
 
 ## Contributing
 

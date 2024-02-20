@@ -36,5 +36,4 @@ Console.WriteLine($"Decrypted data: {decryptionData.DecryptedData}");
 Console.WriteLine($"IV key: {decryptionData.Iv}");
 Console.WriteLine($"Secret key: {decryptionData.SecretKey}");
 
-
-Console.WriteLine("Hello, World!");
+Console.ReadLine();
