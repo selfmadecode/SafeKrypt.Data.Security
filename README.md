@@ -47,7 +47,7 @@ class Program
     static async Task Main()
     {
         
-        var encryptedData = await AesEncryption.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
+        var encryptedData = await Aes.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
         
         Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
         Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
@@ -106,7 +106,7 @@ class Program
         };
 
 
-        var decryptionData = await AesDecryption.DecryptFromBase64StringAsync(decryptorParam);
+        var decryptionData = await Aes.DecryptFromBase64StringAsync(decryptorParam);
 
         Console.WriteLine(decryptionData.DecryptedData);
         Console.WriteLine(decryptionData.Iv);
