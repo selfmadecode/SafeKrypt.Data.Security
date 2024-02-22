@@ -5,9 +5,9 @@ using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace SafeCrypt.AESDecryption
+namespace SafeCrypt.AES
 {
-    public class AesDecryption : BaseAesEncryption
+    public static partial class Aes 
     {
         /// <summary>
         /// Asynchronously decrypts data from a hexadecimal string using the specified decryption parameters and cipher mode.
@@ -19,7 +19,7 @@ namespace SafeCrypt.AESDecryption
         /// The task result is a <see cref="DecryptionData"/> object containing the decrypted data, IV, and secret key.
         /// If decryption fails, the <see cref="DecryptionData"/> object will contain error information.
         /// </returns>
-        public async Task<DecryptionData> DecryptFromHexStringAsync(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
+        public static async Task<DecryptionData> DecryptFromHexStringAsync(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new DecryptionData();
 
@@ -55,7 +55,7 @@ namespace SafeCrypt.AESDecryption
                 Data = param.DataToDecrypt.HexadecimalStringToByteArray()
             };
 
-            var response = await DecryptAsync(byteEncryptionParameters, mode);
+            var response = await BaseAesEncryption.DecryptAsync(byteEncryptionParameters, mode);
 
             return new DecryptionData
             {
@@ -75,7 +75,7 @@ namespace SafeCrypt.AESDecryption
         /// The task result is a <see cref="DecryptionData"/> object containing the decrypted data, IV, and secret key.
         /// If decryption fails, the <see cref="DecryptionData"/> object will contain error information.
         /// </returns>
-        public async Task<DecryptionData> DecryptFromBase64StringAsync(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
+        public static async Task<DecryptionData> DecryptFromBase64StringAsync(DecryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             var responseData = new DecryptionData();
 
@@ -103,7 +103,7 @@ namespace SafeCrypt.AESDecryption
                     Data = Convert.FromBase64String(param.DataToDecrypt)
                 };
 
-                var response = await DecryptAsync(byteDecryptionParameters, mode);
+                var response = await BaseAesEncryption.DecryptAsync(byteDecryptionParameters, mode);
 
                 return new DecryptionData
                 {
@@ -121,7 +121,7 @@ namespace SafeCrypt.AESDecryption
         }
 
 
-        private void NullChecks(string data, string secretKey, string iv)
+        private static void NullChecks(string data, string secretKey, string iv)
         {
             if (data == null || data.Length <= 0)
                 throw new ArgumentNullException(nameof(data));
@@ -133,13 +133,13 @@ namespace SafeCrypt.AESDecryption
                 throw new ArgumentNullException(nameof(iv));
         }
 
-        private (byte[], byte[]) ConvertKeysToBytesAndGetKeys(string secretKey, string iv)
+        private static (byte[], byte[]) ConvertKeysToBytesAndGetKeys(string secretKey, string iv)
         {
 
             return (secretKey.ConvertKeysToBytes(), iv.ConvertKeysToBytes());
         }
 
-        private void AddError(DecryptionData responseData, string error)
+        private static void AddError(DecryptionData responseData, string error)
         {
             responseData.HasError = true;
             responseData.Errors.Add(error);

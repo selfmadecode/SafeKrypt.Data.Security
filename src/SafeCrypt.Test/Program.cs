@@ -1,17 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using SafeCrypt.AESDecryption;
-using SafeCrypt.AESEncryption;
+using SafeCrypt.AES;
 using SafeCrypt.Models;
 
 var dataToEncrypt = "Data to Encrypt";
 var secret = "hghjuytsdfraestwsgtere==";
 
 // Encryption process
-var encryptor = new AesEncryption();
 // this method generates a random IV key for the encryption process
 // the IV is returned in the response with other properties 
-var response = await encryptor.EncryptToBase64StringAsync(dataToEncrypt, secret);
+var response = await Aes.EncryptToBase64StringAsync(dataToEncrypt, secret);
 
 Console.WriteLine("............Encryption Started............");
 
@@ -28,8 +26,7 @@ var decryptorParam = new DecryptionParameters
     DataToDecrypt = response.EncryptedData
 };
 
-var decryptor = new AesDecryption();
-var decryptionData = await decryptor.DecryptFromBase64StringAsync(decryptorParam);
+var decryptionData = await Aes.DecryptFromBase64StringAsync(decryptorParam);
 
 Console.WriteLine("............Decryption Started............");
 Console.WriteLine($"Decrypted data: {decryptionData.DecryptedData}");
