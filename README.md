@@ -4,14 +4,14 @@ A C# library for encryption and decryption.
 
 ## Overview
 
-The Encryption library provides a set of methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm, and other algorithm. It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.
-
+The SafeCrypt library provides a set of methods for encrypting and decrypting data using various encryption algorithms,
+including the Advanced Encryption Standard (AES) and RSA (Rivest–Shamir–Adleman).
+It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [API Reference](#api-reference)
-- [Examples](#examples)
+- [AES Encryption and Decryption usage](#usage)
+- [RSA Encryption and Decryption usage](#rsa)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -34,28 +34,25 @@ To use the SafeCrypt library in your C# project, follow these steps:
 
 Now, you can reference the SafeCrypt library in your C# project.
 
-## Basic Usage
+## Usage
 
-To use the library in your C# application, instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
+To use the AES encryption in your C# application,
+instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
 
 ```csharp
-using SafeCrypt.AESDecryption;
-using SafeCrypt.AESEncryption;
+using SafeCrypt.AES;
 using SafeCrypt.Models; 
 
 class Program
 {
     static async Task Main()
     {
-        var aesEncryptor = new AesEncryption();
         
-        var encryptedData = await aesEncryptor.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
+        var encryptedData = await Aes.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
         
         Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
         Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
-
-        var aesDecryptor = new AesDecryption();
-
+                
         var parameterToDecrypt = new DecryptionParameters
         {
           DataToDecrypt = encryptedData.EncryptedData,
@@ -64,7 +61,7 @@ class Program
 
         };
 
-        var data = await aesDecryptor.DecryptFromBase64StringAsync(parameterToDecrypt)
+        var data = await Aes.DecryptFromBase64StringAsync(parameterToDecrypt)
 
         Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
         Console.WriteLine($"Initialization Vector: {data.Iv}");
@@ -74,8 +71,7 @@ class Program
 
 -------------------------------------------------------------------------------------------------------
 
-using SafeCrypt.AESDecryption;
-using SafeCrypt.AESEncryption;
+using SafeCrypt.AES;
 using SafeCrypt.Models; 
 
 class Program
@@ -94,9 +90,8 @@ class Program
             SecretKey = secret
         };
 
-        var encryptor = new AesEncryption();
 
-        var response = await encryptor.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
+        var response = await Aes.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
 
         Console.WriteLine(response.EncryptedData);
         Console.WriteLine(response.Iv);
@@ -112,8 +107,7 @@ class Program
         };
 
 
-        var decryptor = new AesDecryption();
-        var decryptionData = await decryptor.DecryptFromBase64StringAsync(decryptorParam);
+        var decryptionData = await Aes.DecryptFromBase64StringAsync(decryptorParam);
 
         Console.WriteLine(decryptionData.DecryptedData);
         Console.WriteLine(decryptionData.Iv);
@@ -121,6 +115,14 @@ class Program
     }
 }
 ```
+
+
+## Rsa
+This library provides a straightforward implementation of RSA encryption and decryption in C# using the .NET `RSACryptoServiceProvider`.
+It includes methods for generating RSA key pairs, encrypting data with a public key, and decrypting data with a private key.
+
+For more details on RSA Encryption, check the [Rsa.md](doc/Rsa.md) document.
+
 
 ## Contributing
 

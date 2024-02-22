@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SafeCrypt.AesEncryption
 {
-    public class BaseAesEncryption
+    public static class BaseAesEncryption
     {
         /// <summary>
         /// Encrypts the provided data using the Advanced Encryption Standard (AES) algorithm.
