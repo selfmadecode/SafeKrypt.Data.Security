@@ -5,9 +5,9 @@ using SafeCrypt.AesEncryption;
 using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 
-namespace SafeCrypt.AESEncryption
+namespace SafeCrypt.AES
 {
-    public static class AesEncryption
+    public static partial class Aes
     {
         /// <summary>
         /// Asynchronously encrypts the provided data using the specified secret key and initialization vector (IV).

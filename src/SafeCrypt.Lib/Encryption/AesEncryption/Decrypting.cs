@@ -5,9 +5,9 @@ using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace SafeCrypt.AESDecryption
+namespace SafeCrypt.AES
 {
-    public static class AesDecryption 
+    public static partial class Aes 
     {
         /// <summary>
         /// Asynchronously decrypts data from a hexadecimal string using the specified decryption parameters and cipher mode.
