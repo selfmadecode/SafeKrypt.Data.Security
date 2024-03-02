@@ -76,7 +76,6 @@ namespace SafeCrypt.RsaEncryption
                 });
 
                 result.DecryptedData = decryptedData;
-
             }
             catch (Exception ex)
             {

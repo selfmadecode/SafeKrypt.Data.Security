@@ -4,17 +4,21 @@ using System.Collections;
 
 namespace SafeCrypt.App.Usage;
 
-internal class RsaUsage
+internal static class RsaUsage
 {
-    internal protected async void Usage()
+    internal static async void Execute()
     {
+        Console.WriteLine("------- RSA Test Started -------");
+
         // Example: Generate RSA keys
         var rsaKeyPair = KeyGenerators.GenerateRsaKeys(2048);
-
         string rsaPublicKey = rsaKeyPair.Item1;
         string rsaPrivateKey = rsaKeyPair.Item2;
 
         Console.WriteLine($"pubic key {rsaPublicKey}");
+
+        Console.WriteLine();
+
         Console.WriteLine($"private key {rsaPrivateKey}");
 
         // Example: Encrypt and Decrypt using RSA
@@ -29,6 +33,8 @@ internal class RsaUsage
         var encryptedData = await Rsa.EncryptAsync(enModel);
 
         Console.WriteLine($"Original Data: {originalData}");
+
+        Console.WriteLine();
 
         Console.WriteLine("Original byte array: " + BitConverter.ToString(encryptedData.EncryptedData));
         string EncryptedDataconvertedString = Convert.ToBase64String(encryptedData.EncryptedData);
@@ -49,6 +55,8 @@ internal class RsaUsage
         var decryptedData = await Rsa.DecryptAsync(decryptionModel);
         Console.WriteLine($"{decryptedData.DecryptedData}");
 
-        Console.ReadLine();
+        Console.WriteLine();
+
+        Console.WriteLine("------- RSA Test Ended -------");
     }
 }

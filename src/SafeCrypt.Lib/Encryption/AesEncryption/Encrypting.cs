@@ -49,7 +49,7 @@ namespace SafeCrypt.AES
             {
                 SecretKey = Convert.FromBase64String(param.SecretKey),
                 IV = dataBytes,
-                Data = param.DataToEncrypt.ConvertToHexString().HexadecimalStringToByteArray()
+                Data = param.Data.ConvertToHexString().HexadecimalStringToByteArray()
             };
 
             var response = await BaseAesEncryption.EncryptAsync(byteEncryptionParameters, mode);
@@ -118,7 +118,7 @@ namespace SafeCrypt.AES
         {
             var responseData = new EncryptionData();
 
-            Validators.ValidateNotNull(param);
+            Validator<EncryptionParameters>.ValidateNotNull(param);
 
             // validate is base64
             if (!Validators.IsBase64String(param.SecretKey))

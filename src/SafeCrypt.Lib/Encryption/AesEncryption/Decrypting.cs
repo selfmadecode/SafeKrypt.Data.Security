@@ -23,7 +23,7 @@ namespace SafeCrypt.AES
         {
             var responseData = new DecryptionData();
 
-            Validators.ValidateNotNull(param);
+            Validator<DecryptionParameters>.ValidateNotNull(param);
 
             // validate is base64
             if (!Validators.IsBase64String(param.SecretKey))
@@ -52,7 +52,7 @@ namespace SafeCrypt.AES
             {
                 SecretKey = Convert.FromBase64String(param.SecretKey),
                 IV = dataBytes,
-                Data = param.DataToDecrypt.HexadecimalStringToByteArray()
+                Data = param.Data.HexadecimalStringToByteArray()
             };
 
             var response = await BaseAesEncryption.DecryptAsync(byteEncryptionParameters, mode);
@@ -79,7 +79,7 @@ namespace SafeCrypt.AES
         {
             var responseData = new DecryptionData();
 
-            Validators.ValidateNotNull(param);
+            Validator<DecryptionParameters>.ValidateNotNull(param);
 
 
             if (!Validators.IsBase64String(param.SecretKey))
@@ -100,7 +100,7 @@ namespace SafeCrypt.AES
                 {
                     SecretKey = Convert.FromBase64String(param.SecretKey),
                     IV = Convert.FromBase64String(param.IV),
-                    Data = Convert.FromBase64String(param.DataToDecrypt)
+                    Data = Convert.FromBase64String(param.Data)
                 };
 
                 var response = await BaseAesEncryption.DecryptAsync(byteDecryptionParameters, mode);
