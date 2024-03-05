@@ -1,4 +1,5 @@
 ﻿using SafeCrypt.AES;
+using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 
 namespace SafeCrypt.App.Usage;
@@ -7,42 +8,86 @@ internal static class AesUsage
 {
     internal static async void Execute()
     {
-        Console.WriteLine("------- AES Test Started -------");
+        //Console.WriteLine("------- AES Test Started -------");
 
-        var dataToEncrypt = "Data to Encrypt";
-        var secret = "hghjuytsdfraestwsgtere==";
+        var aesIv = KeyGenerators.GenerateHexadecimalIVKey();
+        var secret = KeyGenerators.GenerateAesSecretKey(256);
+        var dataToEncrypt = "Hello World";
 
-        // Encryption process
-        // this method generates a random IV key for the encryption process
-        // the IV is returned in the response with other properties 
-        var response = await Aes.EncryptToBase64StringAsync(dataToEncrypt, secret);
-
-        Console.WriteLine("............Encryption Started............");
-
-        Console.WriteLine($"Encrypted data: {response.EncryptedData}");
-        Console.WriteLine($"IV key: {response.Iv}");
-        Console.WriteLine($"Secret key: {response.SecretKey}");
-
-        Console.WriteLine();
-
-        // Decryption process
-        var decryptorParam = new DecryptionParameters
+        var data = new EncryptionParameters
         {
-            IV = response.Iv,
-            SecretKey = secret,
-            Data = response.EncryptedData
+            Data = dataToEncrypt,
+            IV = aesIv,
+            SecretKey = secret
         };
 
-        var decryptionData = await Aes.DecryptFromBase64StringAsync(decryptorParam);
+        Console.WriteLine($"Hex Encryption Started");
+        Console.WriteLine();
+        Console.WriteLine();
+        var encryptionResult = await Aes.EncryptToHexStringAsync(data);
 
-        Console.WriteLine("............Decryption Started............");
-        Console.WriteLine($"Decrypted data: {decryptionData.DecryptedData}");
-        Console.WriteLine($"IV key: {decryptionData.Iv}");
-        Console.WriteLine($"Secret key: {decryptionData.SecretKey}");
-        
+        if (encryptionResult.Errors.Count > 0)
+        {
+            // List errors here
+        }
+
+        Console.WriteLine($"Hex Encrypted data: {encryptionResult.EncryptedData}");
+        Console.WriteLine($"IV key: {encryptionResult.Iv}");
+        Console.WriteLine($"Secret key: {encryptionResult.SecretKey}");
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine($"Hex Decryption Started");
+        // Perform decryption using the same IV and secret
+        var decryptionResult = await Aes.DecryptFromHexStringAsync(new DecryptionParameters
+        {
+            Data = encryptionResult.EncryptedData,
+            IV = aesIv,
+            SecretKey = secret
+        });
+
+        Console.WriteLine($"Hex Decrypted data: {decryptionResult.DecryptedData}");
+        Console.WriteLine($"IV key: {decryptionResult.Iv}");
+        Console.WriteLine($"Secret key: {decryptionResult.SecretKey}");
+
+        // Using the EncryptToBase64StringAsync and DecryptFromBase64StringAsync methods
+
+        var base64AesIv = KeyGenerators.GenerateBase64IVKey();
+
+        var base64dataToEncrypt = new EncryptionParameters
+        {
+            Data = dataToEncrypt,
+            IV = base64AesIv,
+            SecretKey = secret
+        };
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine($"Base64 Encryption Started");
+        Console.WriteLine();
+        Console.WriteLine();
+        var encryptedResult = await Aes.EncryptToBase64StringAsync(base64dataToEncrypt);
+        Console.WriteLine($"Base64 Encrypted data: {encryptedResult.EncryptedData}");
+        Console.WriteLine($"IV key: {encryptedResult.Iv}");
+        Console.WriteLine($"Secret key: {encryptedResult.SecretKey}");
+        Console.WriteLine();
         Console.WriteLine();
 
-        Console.WriteLine("------- AES Test Ended -------");
+        Console.WriteLine($"Base64 Decryption Started");
+
+
+        var decryptionResponse = await Aes.DecryptFromBase64StringAsync(new DecryptionParameters
+        {
+            Data = encryptedResult.EncryptedData,
+            IV = base64AesIv,
+            SecretKey = secret
+        });
+
+        Console.WriteLine($"Base64 Decrypted data: {decryptionResponse.DecryptedData}");
+        Console.WriteLine($"IV key: {decryptionResponse.Iv}");
+        Console.WriteLine($"Secret key: {decryptionResponse.SecretKey}");
+
+        //Console.WriteLine("------- AES Test Ended -------");
 
     }
 }
