@@ -6,7 +6,7 @@
     <Title>SafeCrypt - Simple Encryption Library for C#</Title>
     <Authors>selfmade</Authors>
     <Company>NextGen</Company>
-    <Description>This C# library provides methods for encrypting and decrypting data using the Advanced Encryption Standard (AES) algorithm, and more. It offers a simple interface for users to encrypt and decrypt data with ease.</Description>
+    <Description>The SafeCrypt library provides a set of methods for encrypting and decrypting data using various encryption algorithms, including the Advanced Encryption Standard (AES) and RSA (Rivest–Shamir–Adleman). It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.</Description>
     <Copyright>Raphael Anyanwu</Copyright>
     <PackageProjectUrl>https://github.com/selfmadecode/SafeCrypt</PackageProjectUrl>
     <RepositoryUrl>https://github.com/selfmadecode/SafeCrypt</RepositoryUrl>
@@ -15,26 +15,29 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>MitLicense.txt</PackageLicenseFile>
-    <PackageReleaseNotes>SafeCrypt Library - Release Notes - Version 1.0.2
+    <PackageReleaseNotes>Release Note - Version 1.2.0
 
-We are excited to announce the latest version of SafeCrypt (v1.0.2), featuring a significant enhancement to our encryption methods. In this release, all encryption operations are now asynchronous, providing improved performance and responsiveness.
+We are excited to announce the latest version of SafeCrypt (v1.2.0), bringing a new feature, improvements, and bug fixes to enhance your experience with our encryption library. 
 
 What's New:
-Async Encryption and Decryption:
-We have made all encryption methods asynchronous to better align with modern programming practices and enhance the overall responsiveness of SafeCrypt.
 
-Bug Fixes
+Aes Class Renamed:
+We renamed the AesEncryption and AesDecryption class to Aes, and consolidate all encrypting and decrypting methods within this single static class. This means you can now directly access the class without the need for instantiation.
 
-No bug fixes in this release.
+Introduction of RSACryptoServiceProvider Algorithm:
+We have introduced the RSACryptoServiceProvider algorithm, allowing users to choose the encryption method that best suits their specific requirements.
+
+Bug Fixes for Aes:
+We have addressed and resolved several bugs in the Aes implementation.
 
 Upgrade Command:
-dotnet add package SafeCrypt --version 1.0.2
+dotnet add package SafeCrypt --version 1.2.0
 
 Feedback and Contributions:
 We appreciate your feedback and contributions! If you encounter any issues or have suggestions, please create an issue on GitHub: https://github.com/selfmadecode/SafeCrypt/issues
 
 Thank you for using the SafeCrypt Library!</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
