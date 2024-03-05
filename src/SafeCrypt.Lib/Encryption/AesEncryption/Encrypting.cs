@@ -84,24 +84,32 @@ namespace SafeCrypt.AES
         /// <exception cref="FormatException">
         /// Thrown if the base64secretKey is not a valid Base64-encoded string.
         /// </exception>
-        public static async Task<EncryptionData> EncryptToBase64StringAsync(string dataToBeEncrypted, string base64secretKey, CipherMode mode = CipherMode.CBC)
+        public static async Task<EncryptionData> EncryptToBase64StringAsync(EncryptionParameters param, CipherMode mode = CipherMode.CBC)
         {
             // validate is base64
-            if (!Validators.IsBase64String(base64secretKey))
+            var responseData = new EncryptionData();
+
+            var parameterValidation = ValidateEncryptionParameters(param);
+
+            if (parameterValidation.HasError)
             {
-                return null;
+                return parameterValidation;
             }
 
-            NullChecks(data: dataToBeEncrypted, base64secretKey);
+            if (!Validators.IsBase64String(param.SecretKey))
+            {
+                AddError(responseData, "Secret Key not base64");
+            }
 
             // Generate a random 16-byte IV for AES in CBC mode
-            var aesIv = KeyGenerators.GenerateRandomIVKeyAsBytes(16);
+            byte[] aesIv = Convert.FromBase64String(param.IV);
+            
 
             var byteEncryptionParameters = new ByteEncryptionParameters
             {
-                SecretKey = Convert.FromBase64String(base64secretKey),
+                SecretKey = Convert.FromBase64String(param.SecretKey),
                 IV = aesIv,
-                Data = dataToBeEncrypted.ConvertToHexString().HexadecimalStringToByteArray()
+                Data = param.Data.ConvertToHexString().HexadecimalStringToByteArray()
             };
 
             var response = await BaseAesEncryption.EncryptAsync(byteEncryptionParameters, mode);
@@ -109,8 +117,8 @@ namespace SafeCrypt.AES
             return new EncryptionData
             {
                 EncryptedData = Convert.ToBase64String(response),
-                Iv = Convert.ToBase64String(aesIv),
-                SecretKey = base64secretKey
+                Iv = param.IV,
+                SecretKey = param.SecretKey
             };
         }
 
