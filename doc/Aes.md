@@ -1,8 +1,3 @@
-what is secret, what is the length
-what is IV, what is the lenght, IV as base 64, IV as hex
-how to generate default IV with the package
-
-
 # SafeCrypt AES Encryption and Decryption
 
 ## Overview
