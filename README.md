@@ -36,82 +36,9 @@ Now, you can reference the SafeCrypt library in your C# project.
 
 ## Aes
 To use AES encryption in your C# application, access the static Aes class directly.
-Call the provided methods; Here's a simple example:
+Call the provided methods; 
 
-```csharp
-using SafeCrypt.AES;
-using SafeCrypt.Models; 
-
-class Program
-{
-    static async Task Main()
-    {
-        
-        var encryptedData = await Aes.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
-        
-        Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
-        Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
-                
-        var parameterToDecrypt = new DecryptionParameters
-        {
-          DataToDecrypt = encryptedData.EncryptedData,
-          SecretKey = encryptedData.SecretKey,
-          IV = encryptedData.IV
-
-        };
-
-        var data = await Aes.DecryptFromBase64StringAsync(parameterToDecrypt);
-
-        Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
-        Console.WriteLine($"Initialization Vector: {data.Iv}");
-    }
-}
-
-
--------------------------------------------------------------------------------------------------------
-
-using SafeCrypt.AES;
-using SafeCrypt.Models; 
-
-class Program
-{
-    static async Task Main() 
-    {
-        var dataToEncrypt = "Data to Encrypt";
-
-        var iv = "gyrthusdgythisdg";
-        var secret = "hghjuytsdfraestwsgtere==";
-
-        var encryptionParam = new EncryptionParameters
-        {
-            DataToEncrypt = dataToEncrypt,
-            IV = iv,
-            SecretKey = secret
-        };
-
-
-        var response = await Aes.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
-
-        Console.WriteLine(response.EncryptedData);
-        Console.WriteLine(response.Iv);
-        Console.WriteLine(response.SecretKey);
-
-        var decryptorParam = new DecryptionParameters
-        {
-            IV = response.Iv,
-            SecretKey = secret,
-            DataToDecrypt = response.EncryptedData
-        };
-
-        var decryptionData = await Aes.DecryptFromBase64StringAsync(decryptorParam);
-
-        Console.WriteLine(decryptionData.DecryptedData);
-        Console.WriteLine(decryptionData.Iv);
-        Console.WriteLine(decryptionData.SecretKey);
-    }
-}
-```
-
+Check the [Aes.md](doc/Aes.md) documentation for guidance.
 
 ## Rsa
 This library provides a straightforward implementation of RSA encryption and decryption in C# using the .NET `RSACryptoServiceProvider`.
