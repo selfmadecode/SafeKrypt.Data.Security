@@ -6,9 +6,9 @@ namespace SafeCrypt.App.Usage;
 
 internal static class AesUsage
 {
-    internal static async void Execute()
+    internal static async Task Execute()
     {
-        //Console.WriteLine("------- AES Test Started -------");
+        Console.WriteLine("------- AES Test Started -------");
 
         var aesIv = KeyGenerators.GenerateHexadecimalIVKey();
         var secret = KeyGenerators.GenerateAesSecretKey(256);
@@ -21,7 +21,7 @@ internal static class AesUsage
             SecretKey = secret
         };
 
-        Console.WriteLine($"Hex Encryption Started");
+        Console.WriteLine($"AES Hex Encryption Started");
         Console.WriteLine();
         Console.WriteLine();
         var encryptionResult = await Aes.EncryptToHexStringAsync(data);
@@ -37,7 +37,8 @@ internal static class AesUsage
 
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine($"Hex Decryption Started");
+
+        Console.WriteLine($"AES Hex Decryption Started");
         // Perform decryption using the same IV and secret
         var decryptionResult = await Aes.DecryptFromHexStringAsync(new DecryptionParameters
         {
@@ -63,17 +64,20 @@ internal static class AesUsage
 
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine($"Base64 Encryption Started");
+        Console.WriteLine($"AES Base64 Encryption Started");
         Console.WriteLine();
         Console.WriteLine();
+
         var encryptedResult = await Aes.EncryptToBase64StringAsync(base64dataToEncrypt);
+
         Console.WriteLine($"Base64 Encrypted data: {encryptedResult.EncryptedData}");
+
         Console.WriteLine($"IV key: {encryptedResult.Iv}");
         Console.WriteLine($"Secret key: {encryptedResult.SecretKey}");
         Console.WriteLine();
         Console.WriteLine();
 
-        Console.WriteLine($"Base64 Decryption Started");
+        Console.WriteLine($"AES Base64 Decryption Started");
 
 
         var decryptionResponse = await Aes.DecryptFromBase64StringAsync(new DecryptionParameters
@@ -87,7 +91,6 @@ internal static class AesUsage
         Console.WriteLine($"IV key: {decryptionResponse.Iv}");
         Console.WriteLine($"Secret key: {decryptionResponse.SecretKey}");
 
-        //Console.WriteLine("------- AES Test Ended -------");
-
+        Console.WriteLine("------- AES Test Ended -------");
     }
 }
