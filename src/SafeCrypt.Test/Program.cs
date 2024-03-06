@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using SafeCrypt.App.Usage;
 
-RsaUsage.Execute();
+await RsaUsage.Execute();
 
-AesUsage.Execute();
+await AesUsage.Execute();
 
 Console.ReadLine();
