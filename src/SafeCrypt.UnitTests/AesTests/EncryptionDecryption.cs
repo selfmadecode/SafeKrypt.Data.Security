@@ -1,6 +1,7 @@
 ﻿using SafeCrypt.Helpers;
 using SafeCrypt.Models;
 using SafeCrypt.AES;
+using SafeCrypt.RsaEncryption.Models;
 
 namespace SafeCrypt.UnitTests.AesTests;
 
@@ -23,22 +24,57 @@ public class EncryptionDecryption
         };
 
         // Act
-        var encryptedResult = await Aes.EncryptToHexStringAsync(encryptionParameters);
-        var decryptedResult = await Aes.DecryptFromHexStringAsync(new DecryptionParameters
+        var encryptionResult = await Aes.EncryptToHexStringAsync(encryptionParameters);
+        Assert.False(encryptionResult.HasError);
+        
+        var decryptionResult = await Aes.DecryptFromHexStringAsync(new DecryptionParameters
         {
-            Data = encryptedResult.EncryptedData,
+            Data = encryptionResult.EncryptedData,
             IV = aesIv,
             SecretKey = secret
         });
 
         // Assert
-        Assert.NotNull(encryptedResult.EncryptedData);
-        Assert.Equal(Data, decryptedResult.DecryptedData);
+        Assert.NotNull(encryptionResult.EncryptedData);
+        Assert.Equal(Data, decryptionResult.DecryptedData);
 
-        Assert.False(encryptedResult.HasError);
-        Assert.False(decryptedResult.HasError);
+        Assert.False(encryptionResult.HasError);
+        Assert.False(decryptionResult.HasError);
 
-        Assert.Empty(encryptedResult.Errors);
-        Assert.Empty(decryptedResult.Errors);
+        Assert.Empty(encryptionResult.Errors);
+        Assert.Empty(decryptionResult.Errors);
+    }
+
+    [Theory]
+    [InlineData(Data)]
+    public async Task EncryptToBase64StringAndDecryptAsync_DecryptedDataMatchesOriginalData(string originalData)
+    {
+        // Arrange
+        var aesIv = KeyGenerators.GenerateBase64IVKey();
+        var secret = KeyGenerators.GenerateAesSecretKey(256);
+
+        var encryptionParameters = new EncryptionParameters
+        {
+            Data = originalData,
+            IV = aesIv,
+            SecretKey = secret
+        };
+
+        // Act
+        var encryptionResult = await Aes.EncryptToBase64StringAsync(encryptionParameters);
+        Assert.False(encryptionResult.HasError);
+
+        var decryptionParameters = new DecryptionParameters
+        {
+            Data = encryptionResult.EncryptedData,
+            IV = aesIv,
+            SecretKey = secret
+        };
+
+        var decryptionResult = await Aes.DecryptFromBase64StringAsync(decryptionParameters);
+        Assert.False(decryptionResult.HasError);
+
+        // Assert
+        Assert.Equal(originalData, decryptionResult.DecryptedData);
     }
 }
