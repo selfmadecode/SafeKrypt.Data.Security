@@ -4,7 +4,7 @@ using SafeCrypt.AES;
 
 namespace SafeCrypt.UnitTests.AesTests;
 
-public class Encryption
+public class EncryptionDecryption
 {
     public const string Data = "Hello, World!";
 
