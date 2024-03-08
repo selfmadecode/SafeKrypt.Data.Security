@@ -5,12 +5,12 @@ A C# library for encryption and decryption.
 ## Overview
 
 The SafeCrypt library provides a set of methods for encrypting and decrypting data using various encryption algorithms,
-including the Advanced Encryption Standard (AES) and RSA (Rivest–Shamir–Adleman).
+including the Advanced Encryption Standard (AES) and RSA (Rivestâ€“Shamirâ€“Adleman).
 It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.
 ## Table of Contents
 
 - [Installation](#installation)
-- [AES Encryption and Decryption usage](#usage)
+- [AES Encryption and Decryption usage](#aes)
 - [RSA Encryption and Decryption usage](#rsa)
 - [Contributing](#contributing)
 - [License](#license)
@@ -34,88 +34,11 @@ To use the SafeCrypt library in your C# project, follow these steps:
 
 Now, you can reference the SafeCrypt library in your C# project.
 
-## Usage
+## Aes
+To use AES encryption in your C# application, access the static Aes class directly.
+Call the provided methods; 
 
-To use the AES encryption in your C# application,
-instantiate the `AesEncryption` or `AesDecryption` class and call the provided methods. Here's a simple example:
-
-```csharp
-using SafeCrypt.AES;
-using SafeCrypt.Models; 
-
-class Program
-{
-    static async Task Main()
-    {
-        
-        var encryptedData = await Aes.EncryptToBase64StringAsync("Hello, World!", "gdjdtsraewsuteastwerse=="
-        
-        Console.WriteLine($"Encrypted Data: {encryptedData.EncryptedData}");
-        Console.WriteLine($"Initialization Vector: {encryptedData.Iv}");
-                
-        var parameterToDecrypt = new DecryptionParameters
-        {
-          DataToDecrypt = encryptedData.EncryptedData,
-          SecretKey = encryptedData.SecretKey,
-          IV = encryptedData.IV
-
-        };
-
-        var data = await Aes.DecryptFromBase64StringAsync(parameterToDecrypt)
-
-        Console.WriteLine($"Decrypted Data: {data.DecryptedData}");
-        Console.WriteLine($"Initialization Vector: {data.Iv}");
-    }
-}
-
-
--------------------------------------------------------------------------------------------------------
-
-using SafeCrypt.AES;
-using SafeCrypt.Models; 
-
-class Program
-{
-    static async Task Main() 
-    {
-        var dataToEncrypt = "Data to Encrypt";
-
-        var iv = "gyrthusdgythisdg";
-        var secret = "hghjuytsdfraestwsgtere==";
-
-        var encryptionParam = new EncryptionParameters
-        {
-            DataToEncrypt = dataToEncrypt,
-            IV = iv,
-            SecretKey = secret
-        };
-
-
-        var response = await Aes.EncryptToBase64StringAsync(encryptionParam.DataToEncrypt, secret);
-
-        Console.WriteLine(response.EncryptedData);
-        Console.WriteLine(response.Iv);
-        Console.WriteLine(response.SecretKey);
-
-
-
-        var decryptorParam = new DecryptionParameters
-        {
-            IV = response.Iv,
-            SecretKey = secret,
-            DataToDecrypt = response.EncryptedData
-        };
-
-
-        var decryptionData = await Aes.DecryptFromBase64StringAsync(decryptorParam);
-
-        Console.WriteLine(decryptionData.DecryptedData);
-        Console.WriteLine(decryptionData.Iv);
-        Console.WriteLine(decryptionData.SecretKey);
-    }
-}
-```
-
+Check the [Aes.md](doc/Aes.md) documentation for guidance.
 
 ## Rsa
 This library provides a straightforward implementation of RSA encryption and decryption in C# using the .NET `RSACryptoServiceProvider`.

@@ -6,7 +6,7 @@ namespace SafeCrypt.App.Usage;
 
 internal static class RsaUsage
 {
-    internal static async void Execute()
+    internal static async Task Execute()
     {
         Console.WriteLine("------- RSA Test Started -------");
 

@@ -42,10 +42,16 @@ namespace SafeCrypt.Helpers
         /// <see cref="BitConverter.ToString"/>. Any hyphens in the resulting string are removed
         /// using <see cref="string.Replace"/>.
         /// </remarks>
-        public static string GenerateRandomIVKeyAsString()
+        public static string GenerateHexadecimalIVKey()
         {
             byte[] randomBytes = GenerateRandomIVKeyAsBytes(16);            
             return BitConverter.ToString(randomBytes).Replace("-", "");
+        }
+
+        public static string GenerateBase64IVKey()
+        {
+            byte[] randomBytes = GenerateRandomIVKeyAsBytes(16);
+            return Convert.ToBase64String(randomBytes);
         }
 
         /// <summary>

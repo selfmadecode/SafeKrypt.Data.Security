@@ -58,7 +58,7 @@ namespace SafeCrypt.Helpers
         }
 
         /// <summary>
-        /// Converts a string to bytes and validates the resulting byte array.
+        /// Converts a string to byte array.
         /// </summary>
         /// <param name="input">The input string to convert.</param>
         /// <returns>The byte array representation of the input string if valid; otherwise, null.</returns>
