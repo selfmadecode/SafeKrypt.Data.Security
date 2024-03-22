@@ -1,10 +1,5 @@
 ﻿using SafeCrypt.Helpers;
 using SafeCrypt.RsaEncryption;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SafeCrypt.UnitTests.RsaTests;
 
@@ -20,11 +15,6 @@ public class RsaTests
     [Fact]
     public async Task EncryptAsync_DecryptAsync_ValidParameters_ReturnsOriginalData()
     {
-        // Example: Generate RSA keys
-        //var rsaKeyPair = KeyGenerators.GenerateRsaKeys(2048);
-        //string rsaPublicKey = rsaKeyPair.Item1;
-        //string rsaPrivateKey = rsaKeyPair.Item2;
-
         // Arrange
         var model = new RsaEncryptionParameters
         {
