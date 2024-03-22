@@ -10,19 +10,26 @@ namespace SafeCrypt.UnitTests.RsaTests;
 
 public class RsaTests
 {
+    private readonly string PublicKey;
+    private readonly string PrivateKey;
+    public RsaTests()
+    {
+        (PublicKey, PrivateKey) = KeyGenerators.GenerateRsaKeys(2048);
+    }
+
     [Fact]
     public async Task EncryptAsync_DecryptAsync_ValidParameters_ReturnsOriginalData()
     {
         // Example: Generate RSA keys
-        var rsaKeyPair = KeyGenerators.GenerateRsaKeys(2048);
-        string rsaPublicKey = rsaKeyPair.Item1;
-        string rsaPrivateKey = rsaKeyPair.Item2;
+        //var rsaKeyPair = KeyGenerators.GenerateRsaKeys(2048);
+        //string rsaPublicKey = rsaKeyPair.Item1;
+        //string rsaPrivateKey = rsaKeyPair.Item2;
 
         // Arrange
         var model = new RsaEncryptionParameters
         {
             DataToEncrypt = "Hello, RSA!",
-            PublicKey = rsaPublicKey
+            PublicKey = PublicKey
         };
 
         // Act
@@ -31,7 +38,7 @@ public class RsaTests
         var decryptModel = new RsaDecryptionParameters
         {
             DataToDecrypt = encrypt.EncryptedData,
-            PrivateKey = rsaPrivateKey
+            PrivateKey = PrivateKey
         };
 
         var decrypt = await Rsa.DecryptAsync(decryptModel);
@@ -42,5 +49,23 @@ public class RsaTests
         Assert.Empty(encrypt.Errors);
         Assert.NotNull(decrypt.DecryptedData);
         Assert.Empty(decrypt.Errors);
+    }
+
+    [Fact]
+    public async Task EncryptAsync_InvalidData_ReturnsErrors()
+    {
+        // Arrange
+        var model = new RsaEncryptionParameters
+        {
+            DataToEncrypt = "",
+            PublicKey = PublicKey
+        };
+
+        // Act
+        var result = await Rsa.EncryptAsync(model);
+
+        // Assert
+        Assert.Null(result.EncryptedData);
+        Assert.NotEmpty(result.Errors);
     }
 }
