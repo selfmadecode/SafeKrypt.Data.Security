@@ -31,12 +31,15 @@ internal static class AesUsage
             // List errors here
         }
 
+        Console.WriteLine($"Data to Encrypt {dataToEncrypt}");
         Console.WriteLine($"Hex Encrypted data: {encryptionResult.EncryptedData}");
         Console.WriteLine($"IV key: {encryptionResult.Iv}");
         Console.WriteLine($"Secret key: {encryptionResult.SecretKey}");
 
         Console.WriteLine();
         Console.WriteLine();
+
+        Console.WriteLine($"Data to Decrypt: {encryptionResult.EncryptedData}");
 
         Console.WriteLine($"AES Hex Decryption Started");
         // Perform decryption using the same IV and secret
@@ -66,6 +69,8 @@ internal static class AesUsage
         Console.WriteLine();
         Console.WriteLine($"AES Base64 Encryption Started");
         Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine($"Data to Encrypt {dataToEncrypt}");
         Console.WriteLine();
 
         var encryptedResult = await Aes.EncryptToBase64StringAsync(base64dataToEncrypt);
