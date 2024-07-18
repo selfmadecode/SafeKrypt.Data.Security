@@ -1,12 +1,13 @@
-# SafeEnkrypt Library
+# SafeKrypt Library
 
-A C# library for encryption and decryption.
+A C# utility library for encryption and decryption.
 
 ## Overview
 
-The SafeEnkrypt library provides a set of methods for encrypting and decrypting data using various encryption algorithms,
+This library provides a set of methods for encrypting and decrypting data using various encryption algorithms,
 including the Advanced Encryption Standard (AES) and RSA (Rivest–Shamir–Adleman).
 It is designed to be easy to use and can be integrated into C# applications that require secure data transmission or storage.
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -17,12 +18,12 @@ It is designed to be easy to use and can be integrated into C# applications that
 
 ## Installation
 
-To use the SafeEnkrypt library in your C# project, follow these steps:
+To use this library in your C# project, follow these steps:
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/selfmadecode/SafeEnkrypt
+   git clone https://github.com/selfmadecode/SafeKrypt.Data.Security
    ```
 
 2. Build the project:
@@ -31,7 +32,7 @@ To use the SafeEnkrypt library in your C# project, follow these steps:
    dotnet build
    ```
 
-Now, you can reference the SafeEnkrypt library in your C# project.
+Now, you can reference the library in your C# project.
 
 ## Aes
 To use AES encryption in your C# application, access the static Aes class directly.
@@ -48,7 +49,7 @@ For more details on RSA Encryption, check the [Rsa.md](doc/Rsa.md) document.
 
 ## Contributing
 
-If you would like to contribute to the development of the SafeEnkrypt library, follow these steps:
+If you would like to contribute to the development of the library, follow these steps:
 
 1. Create an issue to discuss the proposed changes or bug fixes.
 2. Fork the repository and create a new branch for your work:
@@ -64,4 +65,4 @@ If you would like to contribute to the development of the SafeEnkrypt library, f
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/selfmadecode/SafeEnkrypt/tree/master?tab=MIT-1-ov-file) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/selfmadecode/SafeKrypt.Data.Security/tree/master?tab=MIT-1-ov-file) file for details.
