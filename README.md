@@ -1,4 +1,4 @@
-# SafeKrypt Library
+## SafeKrypt Library
 
 A C# utility library for encryption and decryption.
 

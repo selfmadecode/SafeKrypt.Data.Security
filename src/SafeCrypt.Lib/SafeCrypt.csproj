@@ -15,7 +15,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>MitLicense.txt</PackageLicenseFile>
-    <PackageReleaseNotes>Release Note - Version 1.2.3
+    <PackageReleaseNotes>Release Note - Version 1.2.2
 
 What's New:
 We updated some code comments, typo and repo url
