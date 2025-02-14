@@ -20,7 +20,7 @@ namespace SafeCrypt.RsaEncryption
     public sealed class RsaDecryptionParameters 
     {
         /// <summary>
-        /// Gets or sets the public key for RSA encryption.
+        /// Gets or sets the private key for RSA encryption.
         /// </summary>
         [Required]
         public string PrivateKey { get; set; }
