@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Security;
+using System;
 using System.Security.Cryptography;
 
 namespace SafeCrypt.Helpers
@@ -100,6 +101,25 @@ namespace SafeCrypt.Helpers
 
                 return new Tuple<string, string>(publicKey, privateKey);
             }
+        }
+
+        /// <summary>
+        /// Generates a random key of the specified length.
+        /// </summary>
+        /// <param name="keySizeBits">Key size in bits (32 to 448).</param>
+        /// <returns>The generated key as a byte array.</returns>
+        public static byte[] GenerateBlowfishKey(int keySizeBits)
+        {
+            if (keySizeBits < 32 || keySizeBits > 448 || keySizeBits % 8 != 0)
+            {
+                throw new ArgumentException("Key size must be between 32 and 448 bits, in multiples of 8.");
+            }
+
+            var random = new SecureRandom();
+            byte[] key = new byte[keySizeBits / 8];
+            random.NextBytes(key);
+
+            return key;
         }
     }
 }
