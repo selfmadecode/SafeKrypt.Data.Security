@@ -1,4 +1,12 @@
 ## SafeKrypt Library
+[![NuGet Version](https://img.shields.io/nuget/v/SafeCrypt.Data.Security.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/SafeCrypt.Data.Security)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/SafeCrypt.Data.Security.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/SafeCrypt.Data.Security)
+[![License](https://img.shields.io/github/license/selfmadecode/SafeKrypt.Data.Security.svg?style=flat)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/selfmadecode/SafeKrypt.Data.Security?style=flat&logo=github)](https://github.com/selfmadecode/SafeKrypt.Data.Security/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/selfmadecode/SafeKrypt.Data.Security.svg?style=flat)](https://github.com/selfmadecode/SafeKrypt.Data.Security/issues)
+[![Open PRs](https://img.shields.io/github/issues-pr/selfmadecode/SafeKrypt.Data.Security.svg?style=flat)](https://github.com/selfmadecode/SafeKrypt.Data.Security/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/selfmadecode/SafeKrypt.Data.Security/pulls)
+![.NET Standard 2.0](https://img.shields.io/badge/.NET-Standard%202.0-512BD4?style=flat&logo=dot-net)
 
 A C# utility library for encryption and decryption.
 
